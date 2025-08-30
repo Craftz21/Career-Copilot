@@ -3,7 +3,6 @@ import json
 import tempfile
 from fastapi import FastAPI, UploadFile, File, Form
 from dotenv import load_dotenv
-# This is the line that was missing
 from sqlalchemy import create_engine, text
 from analysis.resume_analyzer import parse_pdf_text, extract_skills_from_text, save_user_skills, compute_gap
 from ai.generate_roadmap import generate_roadmap
