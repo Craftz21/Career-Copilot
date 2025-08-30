@@ -1,0 +1,21 @@
+
+fastapi
+uvicorn[standard]
+python-multipart
+
+
+SQLAlchemy
+PyMySQL
+
+
+langchain-groq
+langchain-community
+sentence-transformers
+faiss-cpu # For efficient vector similarity search
+
+
+pandas
+numpy
+PyMuPDF     # Used for PDF parsing (import fitz)
+python-dotenv
+requests

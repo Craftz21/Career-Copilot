@@ -1,0 +1,22 @@
+# Python
+__pycache__/
+*.pyc
+*.pyo
+
+# Virtual environment
+venv/
+
+# Environment variables
+.env
+
+# MySQL local data
+mysql-data/
+mysql-data-backup/
+mysql-conf/
+
+# OS files
+.DS_Store
+Thumbs.db
+
+check_db.py
+resources.csv
