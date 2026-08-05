@@ -1,22 +1,72 @@
 # Python
 __pycache__/
-*.pyc
+*.py[cod]
 *.pyo
+*.pyd
+*.so
+*.egg
+*.egg-info/
+dist/
+build/
+.eggs/
 
-# Virtual environment
+# Virtual environments
 venv/
+.venv/
+env/
 
-# Environment variables
+# Environment — NEVER commit credentials
 .env
+.env.local
+.env.*.local
 
-# MySQL local data
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Testing
+.pytest_cache/
+.coverage
+htmlcov/
+.mypy_cache/
+.ruff_cache/
+
+# Uploads / temp files
+uploads/
+tmp/
+*.tmp
+
+# Legacy MySQL data (no longer used)
 mysql-data/
 mysql-data-backup/
 mysql-conf/
 
-# OS files
-.DS_Store
-Thumbs.db
+# Database migrations — keep versions, ignore compiled
+migrations/versions/*.pyc
+migrations/**/__pycache__/
 
+# Logs
+*.log
+logs/
+
+# Data files — large CSVs not committed (seed data is in data/raw/)
+data/processed/
+
+# Docker volumes
+postgres-data/
+redis-data/
+
+# Generated test fixtures (recreated by tests/fixtures/generate_fixtures.py)
+test_resumes/
+
+# Internal development files — not for public repository
+.claude/
+PROJECT_MEMORY.md
 check_db.py
-resources.csv
+FINAL_RELEASE_CHECKLIST.md

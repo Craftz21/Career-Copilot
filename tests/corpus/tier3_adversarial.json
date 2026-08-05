@@ -1,0 +1,89 @@
+{
+  "_comment": "Tier 3: Adversarial false-positive traps. severity=critical must be clean in CI; severity=known_risk is measured/documented but does not fail tests.",
+  "probes": [
+    {
+      "text": "The algorithm runs in O(n log n) time complexity",
+      "forbidden_canonicals": ["go"],
+      "severity": "critical",
+      "description": "go must NOT match inside 'algorithm' or 'log' — word boundary check"
+    },
+    {
+      "text": "The Django framework has a distinctive logo",
+      "forbidden_canonicals": ["go"],
+      "severity": "critical",
+      "description": "go must NOT match inside 'Django' or 'logo'"
+    },
+    {
+      "text": "I deployed the application to production",
+      "forbidden_canonicals": ["go"],
+      "severity": "critical",
+      "description": "go must NOT match inside 'deployed'"
+    },
+    {
+      "text": "The team worked on debugging and logging infrastructure",
+      "forbidden_canonicals": ["go"],
+      "severity": "critical",
+      "description": "go must NOT match inside 'debugging' or 'logging'"
+    },
+    {
+      "text": "Add salt and pepper to taste before serving",
+      "forbidden_canonicals": ["saltstack"],
+      "severity": "known_risk",
+      "description": "salt alias FP — culinary 'salt' is indistinguishable from SaltStack alias by word boundary alone"
+    },
+    {
+      "text": "The falcon bird soars over the mountain range",
+      "forbidden_canonicals": ["falcon"],
+      "severity": "known_risk",
+      "description": "falcon canonical FP — bird reference; common English word, unfixable by alias scan"
+    },
+    {
+      "text": "Option C was selected after reviewing all proposals",
+      "forbidden_canonicals": ["c"],
+      "severity": "known_risk",
+      "description": "c canonical FP — single-letter list item; single-char aliases have inherent high FP risk"
+    },
+    {
+      "text": "The r-squared value indicates a strong correlation",
+      "forbidden_canonicals": ["r"],
+      "severity": "known_risk",
+      "description": "r canonical FP — 'r' in 'r-squared' matches \\br\\b since hyphen is a non-word char"
+    },
+    {
+      "text": "The Python code was refactored using clean coding principles",
+      "forbidden_canonicals": ["c"],
+      "severity": "known_risk",
+      "description": "c canonical — 'c' in 'code', 'clean', 'coding' are word-internal, but standalone 'c' risk exists in some phrasings"
+    },
+    {
+      "text": "echo chamber effect in social media algorithms",
+      "forbidden_canonicals": ["echo"],
+      "severity": "known_risk",
+      "description": "echo canonical FP risk — 'echo' is a common English word. Currently unfixable without context-aware matching."
+    },
+    {
+      "text": "I go above and beyond to deliver high quality work",
+      "forbidden_canonicals": ["go"],
+      "severity": "known_risk",
+      "description": "go FP risk — standalone English verb. Known limitation of pure alias matching."
+    },
+    {
+      "text": "Spring is the best season for outdoor activities",
+      "forbidden_canonicals": ["spring"],
+      "severity": "known_risk",
+      "description": "spring FP risk — season reference. Known limitation."
+    },
+    {
+      "text": "We need to spring into action before the deadline",
+      "forbidden_canonicals": ["spring"],
+      "severity": "known_risk",
+      "description": "spring FP risk — English verb. Known limitation."
+    },
+    {
+      "text": "The ruby gemstone was found in Myanmar",
+      "forbidden_canonicals": ["ruby"],
+      "severity": "known_risk",
+      "description": "ruby FP risk — gemstone reference. Less common than other false positives."
+    }
+  ]
+}

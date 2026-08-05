@@ -1,0 +1,87 @@
+# Render Blueprint — CareerCopilot
+# One-click deploy: connect this repo in Render, it reads this file.
+# After first deploy, run once via Render Shell: python scripts/seed_db.py
+
+services:
+  # ── API (FastAPI) ─────────────────────────────────────────────────────────
+  - type: web
+    name: careerpilot-api
+    runtime: python
+    plan: free
+    region: singapore
+    branch: main
+    buildCommand: pip install -e .
+    startCommand: bash scripts/start_api.sh
+    healthCheckPath: /health
+    envVars:
+      - key: APP_ENV
+        value: production
+      - key: APP_SECRET_KEY
+        generateValue: true
+      - key: APP_LOG_LEVEL
+        value: info
+      - key: DATABASE_URL
+        sync: false          # paste your Neon connection string here
+      - key: REDIS_URL
+        sync: false          # paste your Upstash rediss:// URL here
+      - key: GROQ_API_KEY
+        sync: false          # paste your Groq API key here
+      - key: LLM_MODEL
+        value: llama-3.3-70b-versatile
+      - key: EMBEDDING_MODEL
+        value: sentence-transformers/all-MiniLM-L6-v2
+      - key: EMBEDDING_DIMENSION
+        value: "384"
+      - key: SKILL_EXTRACTION_THRESHOLD
+        value: "0.38"
+      - key: SKILL_EXTRACTION_TOP_K
+        value: "30"
+      - key: MAX_UPLOAD_SIZE_MB
+        value: "5"
+      - key: SESSION_TTL_DAYS
+        value: "7"
+      - key: RATE_LIMIT_UPLOAD_PER_HOUR
+        value: "5"
+      - key: RATE_LIMIT_ROADMAP_PER_HOUR
+        value: "5"
+      - key: PYTHONUNBUFFERED
+        value: "1"
+      - key: PYTHONPATH
+        value: /opt/render/project/src
+
+  # ── Celery Worker ─────────────────────────────────────────────────────────
+  - type: worker
+    name: careerpilot-worker
+    runtime: python
+    plan: free
+    region: singapore
+    branch: main
+    buildCommand: pip install -e .
+    startCommand: celery -A src.worker worker --loglevel=info --concurrency=1
+    envVars:
+      - key: APP_ENV
+        value: production
+      - key: DATABASE_URL
+        sync: false
+      - key: REDIS_URL
+        sync: false
+      - key: GROQ_API_KEY
+        sync: false
+      - key: LLM_MODEL
+        value: llama-3.3-70b-versatile
+      - key: EMBEDDING_MODEL
+        value: sentence-transformers/all-MiniLM-L6-v2
+      - key: EMBEDDING_DIMENSION
+        value: "384"
+      - key: SKILL_EXTRACTION_THRESHOLD
+        value: "0.38"
+      - key: SKILL_EXTRACTION_TOP_K
+        value: "30"
+      - key: MAX_UPLOAD_SIZE_MB
+        value: "5"
+      - key: SESSION_TTL_DAYS
+        value: "7"
+      - key: PYTHONUNBUFFERED
+        value: "1"
+      - key: PYTHONPATH
+        value: /opt/render/project/src

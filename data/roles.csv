@@ -1,0 +1,34 @@
+canonical_name,display_name,domain,level,aliases
+backend_engineer,Backend Software Engineer,software_engineering,mid,backend developer|backend engineer|server-side developer|backend software developer|backend programmer|api developer|server engineer
+frontend_engineer,Frontend Software Engineer,software_engineering,mid,frontend developer|frontend engineer|ui developer|client-side developer|web developer frontend|react developer|vue developer|angular developer
+fullstack_engineer,Full-Stack Software Engineer,software_engineering,mid,fullstack developer|full stack developer|full-stack engineer|frontend backend developer|web developer full stack|software engineer|software developer|swe|sde|software engineering|engineer
+mobile_engineer_ios,iOS Developer,mobile_development,mid,ios engineer|ios developer|swift developer|iphone developer|apple developer|ios mobile developer|swiftui developer
+mobile_engineer_android,Android Developer,mobile_development,mid,android engineer|android developer|kotlin developer|android mobile developer|android programmer
+mobile_engineer_crossplatform,Mobile Developer,mobile_development,mid,cross platform mobile developer|react native developer|flutter developer|mobile app developer|mobile engineer
+data_scientist,Data Scientist,data_science,mid,data scientist|ml data scientist|statistical analyst|data analyst scientist|applied scientist
+data_analyst,Data Analyst,data_analytics,mid,data analyst|business analyst data|analytics analyst|sql analyst|bi analyst|tableau analyst
+data_engineer,Data Engineer,data_engineering,mid,data engineer|etl developer|data pipeline engineer|big data engineer|data infrastructure engineer|pipeline developer
+ml_engineer,Machine Learning Engineer,machine_learning,mid,machine learning engineer|ml engineer|ai ml engineer|applied ml engineer|mlops engineer|model engineer
+ai_engineer,AI Engineer,artificial_intelligence,mid,ai engineer|artificial intelligence engineer|llm engineer|genai engineer|generative ai engineer|ai developer|prompt engineer
+devops_engineer,DevOps Engineer,devops,mid,devops engineer|dev ops engineer|cicd engineer|automation engineer|release engineer|build engineer
+sre,Site Reliability Engineer,devops,mid,sre|site reliability engineer|platform reliability engineer|production engineer|chaos engineer
+platform_engineer,Platform Engineer,devops,mid,platform engineer|infrastructure engineer|developer platform engineer|internal platform developer|cloud platform engineer
+cloud_engineer,Cloud Engineer,cloud,mid,cloud engineer|cloud infrastructure engineer|cloud architect associate|cloud developer|aws engineer|gcp engineer|azure engineer
+security_engineer,Security Engineer,security,mid,security engineer|application security engineer|appsec engineer|cybersecurity engineer|infosec engineer|security developer
+software_architect,Software Architect,software_engineering,senior,software architect|solutions architect|system architect|technical architect|application architect
+solutions_architect,Solutions Architect,cloud,senior,solutions architect aws|cloud solutions architect|enterprise architect|technical solutions architect
+staff_engineer,Staff Software Engineer,software_engineering,senior,staff engineer|staff swe|senior staff engineer|senior backend engineer|senior frontend engineer|senior fullstack engineer
+principal_engineer,Principal Software Engineer,software_engineering,senior,principal engineer|principal swe|distinguished engineer|senior principal engineer
+engineering_manager,Engineering Manager,management,management,em|engineering manager|engineering lead|software engineering manager|team manager engineering
+cto,Chief Technology Officer,management,executive,cto|chief technology officer|head of engineering|vp engineering
+backend_engineer_python,Python Backend Engineer,software_engineering,mid,python developer backend|python backend developer|django developer|fastapi developer|flask developer|python api developer
+backend_engineer_java,Java Backend Engineer,software_engineering,mid,java developer backend|java backend developer|spring boot developer|java api developer|java software engineer|jvm developer
+backend_engineer_nodejs,Node.js Backend Engineer,software_engineering,mid,nodejs developer|node.js developer|javascript backend developer|express developer|nestjs developer|node backend engineer
+backend_engineer_go,Go Backend Engineer,software_engineering,mid,golang developer|go developer|go backend developer|golang backend engineer|go engineer
+backend_engineer_rust,Rust Engineer,software_engineering,mid,rust developer|rust backend developer|rust engineer|systems rust developer
+database_administrator,Database Administrator,databases,mid,dba|database administrator|db admin|sql dba|postgres dba|mysql dba|database manager
+data_architect,Data Architect,data_engineering,senior,data architect|database architect|enterprise data architect|data modeling architect|analytics architect
+blockchain_developer,Blockchain Developer,blockchain,mid,blockchain engineer|web3 developer|smart contract developer|solidity developer|ethereum developer|defi developer|nft developer
+embedded_engineer,Embedded Systems Engineer,systems,mid,embedded developer|firmware engineer|embedded systems developer|iot engineer|rtos developer|embedded c developer
+game_developer,Game Developer,game_development,mid,game engineer|unity developer|unreal developer|game programmer|game software engineer|indie game developer
+research_engineer,Research Engineer,research,senior,research software engineer|applied researcher|ai researcher|ml researcher|research scientist engineer

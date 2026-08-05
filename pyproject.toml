@@ -1,0 +1,90 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.backends.legacy:build"
+
+[project]
+name = "career-copilot"
+version = "2.0.0"
+description = "AI-powered career intelligence platform"
+requires-python = ">=3.11"
+dependencies = [
+    # Web
+    "fastapi>=0.115.0",
+    "uvicorn[standard]>=0.32.0",
+    "python-multipart>=0.0.12",
+    "jinja2>=3.1.4",
+    "aiofiles>=24.1.0",
+
+    # Config
+    "pydantic-settings>=2.6.0",
+    "python-dotenv>=1.0.0",
+
+    # Database
+    "sqlalchemy>=2.0.36",
+    "psycopg2-binary>=2.9.10",
+    "pgvector>=0.3.6",
+    "alembic>=1.14.0",
+
+    # Task Queue
+    "celery[redis]>=5.4.0",
+    "redis>=5.2.0",
+
+    # AI / ML
+    "sentence-transformers>=3.3.1",
+    "groq>=0.8.0",
+
+    # Document Parsing
+    "pymupdf>=1.25.0",
+    "python-docx>=1.1.2",
+
+    # Data
+    "pandas>=2.2.3",
+    "numpy>=2.2.0",
+
+    # Logging
+    "structlog>=24.4.0",
+
+    # HTTP
+    "httpx>=0.28.0",
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=8.3.0",
+    "pytest-asyncio>=0.24.0",
+    "pytest-cov>=6.0.0",
+    "httpx>=0.28.0",
+    "ruff>=0.8.0",
+    "mypy>=1.13.0",
+]
+
+[tool.setuptools.packages.find]
+where = ["."]
+include = ["src*"]
+
+[tool.ruff]
+line-length = 100
+target-version = "py311"
+
+[tool.ruff.lint]
+select = ["E", "F", "W", "I", "UP", "B"]
+ignore = ["E501", "B008"]
+
+[tool.mypy]
+python_version = "3.11"
+strict = false
+ignore_missing_imports = true
+
+[tool.pytest.ini_options]
+asyncio_mode = "auto"
+testpaths = ["tests"]
+python_files = ["test_*.py"]
+python_functions = ["test_*"]
+markers = [
+    "requires_db: marks tests that need a reachable PostgreSQL database (skip with -m 'not requires_db')",
+    "requires_seed: marks tests that need seeded role_categories + skills data (run: make seed)",
+]
+
+[tool.coverage.run]
+source = ["src"]
+omit = ["tests/*", "scripts/*", "migrations/*"]

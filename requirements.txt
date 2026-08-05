@@ -1,21 +1,41 @@
+# Generated from pyproject.toml — keep in sync.
+# Render uses this file if present; pyproject.toml is the source of truth.
 
-fastapi
-uvicorn[standard]
-python-multipart
+# Web
+fastapi>=0.115.0
+uvicorn[standard]>=0.32.0
+python-multipart>=0.0.12
+jinja2>=3.1.4
+aiofiles>=24.1.0
 
+# Config
+pydantic-settings>=2.6.0
+python-dotenv>=1.0.0
 
-SQLAlchemy
-PyMySQL
+# Database
+sqlalchemy>=2.0.36
+psycopg2-binary>=2.9.10
+pgvector>=0.3.6
+alembic>=1.14.0
 
+# Task Queue
+celery[redis]>=5.4.0
+redis>=5.2.0
 
-langchain-groq
-langchain-community
-sentence-transformers
-faiss-cpu # For efficient vector similarity search
+# AI / ML
+sentence-transformers>=3.3.1
+groq>=0.8.0
 
+# Document Parsing
+pymupdf>=1.25.0
+python-docx>=1.1.2
 
-pandas
-numpy
-PyMuPDF     # Used for PDF parsing (import fitz)
-python-dotenv
-requests
+# Data
+pandas>=2.2.3
+numpy>=2.2.0
+
+# Logging
+structlog>=24.4.0
+
+# HTTP
+httpx>=0.28.0

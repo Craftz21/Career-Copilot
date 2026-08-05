@@ -1,0 +1,911 @@
+{% extends "base.html" %}
+{% block title %}CareerCopilot — Results{% endblock %}
+
+{% block content %}
+<div class="fade-in">
+
+  {# ════════════════════════════════════════════════════════════
+     SECTION 1 — EXECUTIVE SUMMARY
+  ════════════════════════════════════════════════════════════ #}
+  <div class="bg-white rounded-2xl border border-slate-200 shadow-sm p-8 mb-6">
+
+    <div class="flex flex-col lg:flex-row lg:items-start lg:justify-between gap-6">
+
+      {# Score block #}
+      <div class="flex-1">
+
+        {# Mode badge #}
+        {% if jd_analysis %}
+        <div class="inline-flex items-center gap-1.5 text-xs font-semibold text-indigo-700 bg-indigo-50 border border-indigo-200 rounded-full px-3 py-1 mb-4">
+          📄 JD Match Analysis{% if jd_analysis.job_title %}&nbsp;·&nbsp;{{ jd_analysis.job_title }}{% if jd_analysis.company_name %} at {{ jd_analysis.company_name }}{% endif %}{% endif %}
+        </div>
+        {% else %}
+        <div class="inline-flex items-center gap-1.5 text-xs font-semibold text-brand-700 bg-brand-50 border border-brand-200 rounded-full px-3 py-1 mb-4">
+          🎯 Role Analysis · {{ target_role }}
+        </div>
+        {% endif %}
+
+        <div class="flex items-end gap-5 mb-5">
+          <div class="text-8xl font-extrabold leading-none tabular-nums
+            {% if readiness_score >= 70 %}text-green-500
+            {% elif readiness_score >= 40 %}text-yellow-500
+            {% else %}text-red-500{% endif %}">{{ readiness_score }}%</div>
+          <div class="pb-2 flex-1">
+            <div class="text-xs font-semibold text-slate-500 uppercase tracking-widest mb-2">
+              {% if jd_analysis %}JD Match Score{% else %}Readiness Score{% endif %}
+            </div>
+            <div class="w-full max-w-xs bg-slate-100 rounded-full h-3 overflow-hidden">
+              <div class="h-full rounded-full
+                {% if readiness_score >= 70 %}bg-green-400
+                {% elif readiness_score >= 40 %}bg-yellow-400
+                {% else %}bg-red-400{% endif %}"
+                style="width: {{ readiness_score }}%"></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="flex items-center gap-8">
+          <div class="text-center">
+            <div class="text-2xl font-bold text-green-500">{{ gap_data.matched_skills | length }}</div>
+            <div class="text-xs text-slate-500 mt-0.5">Matched</div>
+          </div>
+          <div class="w-px h-8 bg-slate-200"></div>
+          <div class="text-center">
+            <div class="text-2xl font-bold text-red-400">{{ gap_data.missing_skills | length }}</div>
+            <div class="text-xs text-slate-500 mt-0.5">Gaps</div>
+          </div>
+          <div class="w-px h-8 bg-slate-200"></div>
+          <div class="text-center">
+            <div class="text-2xl font-bold text-blue-400">{{ gap_data.bonus_skills | length }}</div>
+            <div class="text-xs text-slate-500 mt-0.5">Bonus</div>
+          </div>
+        </div>
+
+        {# ── F10: Score contributors — why is the score what it is? ── #}
+        {% if score_contributors %}
+        <div class="mt-4 pt-4 border-t border-slate-100">
+          <div class="text-xs font-semibold text-slate-400 uppercase tracking-wide mb-2">Score breakdown</div>
+          <div class="flex flex-wrap gap-1.5">
+            {% for c in score_contributors %}
+            {# Adjacent/transferable gaps shown in blue (not fully missing) #}
+            <span class="text-xs font-semibold tabular-nums px-2.5 py-0.5 rounded-full border
+              {% if c.matched %}bg-green-50 text-green-700 border-green-200
+              {% elif c.get('gap_status') in ('adjacent_expertise', 'transferable') %}bg-blue-50 text-blue-600 border-blue-100
+              {% else %}bg-red-50 text-red-600 border-red-100{% endif %}"
+              {% if not c.matched and c.get('via_skill') %}title="via {{ c.via_skill }}"{% endif %}>
+              {{ '+' if c.matched else ('~' if c.get('gap_status') in ('adjacent_expertise', 'transferable') else '−') }}{{ c.impact }}% {{ c.display_name }}
+            </span>
+            {% endfor %}
+          </div>
+          {% set adj_count = score_contributors | selectattr('gap_status', 'in', ['adjacent_expertise', 'transferable']) | list | length %}
+          {% if adj_count > 0 %}
+          <p class="text-xs text-slate-400 mt-1.5">~ = adjacent expertise (partial credit applied)</p>
+          {% endif %}
+        </div>
+        {% endif %}
+
+        {# Score delta note: show when adjusted score is meaningfully higher than raw #}
+        {% if raw_readiness_score and (readiness_score - raw_readiness_score) >= 5 %}
+        <p class="text-xs text-blue-500 mt-2">
+          +{{ readiness_score - raw_readiness_score }}% adjusted for adjacent expertise
+        </p>
+        {% endif %}
+      </div>
+
+      {# Hiring signal card #}
+      {% if recruiter_summary and recruiter_summary.verdict %}
+      <div class="lg:w-72 shrink-0 rounded-xl border p-5
+        {% if recruiter_summary.verdict_color == 'green' %}border-green-200 bg-green-50
+        {% elif recruiter_summary.verdict_color == 'yellow' %}border-yellow-200 bg-yellow-50
+        {% elif recruiter_summary.verdict_color == 'orange' %}border-orange-200 bg-orange-50
+        {% else %}border-red-200 bg-red-50{% endif %}">
+        <div class="text-xs font-bold uppercase tracking-widest mb-2
+          {% if recruiter_summary.verdict_color == 'green' %}text-green-600
+          {% elif recruiter_summary.verdict_color == 'yellow' %}text-yellow-600
+          {% elif recruiter_summary.verdict_color == 'orange' %}text-orange-600
+          {% else %}text-red-600{% endif %}">Hiring Signal</div>
+        <div class="font-bold text-slate-800 text-base mb-2">{{ recruiter_summary.verdict }}</div>
+        <p class="text-sm text-slate-600 leading-relaxed">{{ recruiter_summary.reasoning }}</p>
+        {% if recruiter_summary.suggested_level %}
+        <div class="mt-3 pt-3 border-t border-slate-200">
+          <div class="text-xs text-slate-400 font-semibold uppercase tracking-wide mb-1">Suggested Level</div>
+          <div class="text-sm font-bold text-slate-700">{{ recruiter_summary.suggested_level }}</div>
+        </div>
+        {% endif %}
+        {% if recruiter_summary.interview_focus %}
+        <div class="mt-3 pt-3 border-t border-slate-200">
+          <div class="text-xs text-slate-400 font-semibold uppercase tracking-wide mb-2">Interview Focus</div>
+          <ul class="space-y-1.5">
+            {% for focus in recruiter_summary.interview_focus %}
+            <li class="text-xs text-slate-600 flex items-start gap-1.5 leading-relaxed">
+              <span class="shrink-0 text-slate-400 mt-0.5">→</span>{{ focus }}
+            </li>
+            {% endfor %}
+          </ul>
+        </div>
+        {% endif %}
+      </div>
+      {% endif %}
+
+    </div>
+
+    <div class="mt-6 pt-6 border-t border-slate-100 flex flex-wrap gap-3">
+      <button
+        onclick="var btn=this;navigator.clipboard.writeText(window.location.href).then(function(){btn.textContent='✓ Copied!';setTimeout(function(){btn.textContent='🔗 Share Results';},2000);})"
+        class="flex items-center gap-2 text-sm border border-slate-300 px-4 py-2 rounded-lg hover:bg-slate-50 transition-colors">
+        🔗 Share Results
+      </button>
+      <a href="/" class="flex items-center gap-2 text-sm bg-brand-600 text-white px-4 py-2 rounded-lg hover:bg-brand-700 transition-colors">
+        ↑ Re-upload Resume
+      </a>
+    </div>
+  </div>
+
+  {# ════════════════════════════════════════════════════════════
+     SECTION A — ROLES YOU CAN APPLY TO TODAY
+  ════════════════════════════════════════════════════════════ #}
+  {% if role_fit and (role_fit.get('apply_now') or role_fit.get('need_experience') or role_fit.get('farther_away')) %}
+  <div class="bg-white rounded-2xl border border-slate-200 shadow-sm p-6 mb-6">
+    <h2 class="text-xs font-bold text-slate-700 uppercase tracking-widest mb-5 flex items-center gap-2">
+      <span class="text-brand-500">◎</span> Roles You Can Apply To Today
+    </h2>
+
+    {% if role_fit.apply_now %}
+    <div class="mb-6">
+      <div class="flex items-center gap-2 mb-3">
+        <span class="w-2 h-2 rounded-full bg-green-400 shrink-0"></span>
+        <span class="text-xs font-bold text-green-700 uppercase tracking-wide">Apply Now</span>
+        <span class="text-xs text-slate-400">— competitive application today</span>
+      </div>
+      <div class="space-y-2">
+        {% for role in role_fit.apply_now %}
+        <div class="flex items-center justify-between rounded-xl border border-green-100 bg-green-50 px-4 py-2.5">
+          <div class="min-w-0">
+            <span class="text-sm font-semibold text-slate-800">{{ role.display_name }}</span>
+            {% if role.domain %}<span class="text-xs text-slate-400 ml-2">· {{ role.domain }}</span>{% endif %}
+          </div>
+          <span class="text-sm font-bold text-green-700 tabular-nums shrink-0 ml-4">{{ role.fit_pct }}%</span>
+        </div>
+        {% endfor %}
+      </div>
+    </div>
+    {% endif %}
+
+    {% if role_fit.need_experience %}
+    <div class="mb-6">
+      <div class="flex items-center gap-2 mb-3">
+        <span class="w-2 h-2 rounded-full bg-yellow-400 shrink-0"></span>
+        <span class="text-xs font-bold text-yellow-700 uppercase tracking-wide">Need More Experience</span>
+        <span class="text-xs text-slate-400">— closable in 1–3 months</span>
+      </div>
+      <div class="space-y-2">
+        {% for role in role_fit.need_experience %}
+        <div class="flex items-center justify-between rounded-xl border border-yellow-100 bg-yellow-50 px-4 py-2.5">
+          <div class="min-w-0">
+            <span class="text-sm font-semibold text-slate-800">{{ role.display_name }}</span>
+            {% if role.domain %}<span class="text-xs text-slate-400 ml-2">· {{ role.domain }}</span>{% endif %}
+          </div>
+          <span class="text-sm font-bold text-yellow-700 tabular-nums shrink-0 ml-4">{{ role.fit_pct }}%</span>
+        </div>
+        {% endfor %}
+      </div>
+    </div>
+    {% endif %}
+
+    {% if role_fit.farther_away %}
+    <div>
+      <div class="flex items-center gap-2 mb-3">
+        <span class="w-2 h-2 rounded-full bg-slate-300 shrink-0"></span>
+        <span class="text-xs font-bold text-slate-500 uppercase tracking-wide">Longer-Term Goals</span>
+        <span class="text-xs text-slate-400">— significant preparation needed</span>
+      </div>
+      <div class="space-y-2">
+        {% for role in role_fit.farther_away %}
+        <div class="flex items-center justify-between rounded-xl border border-slate-100 bg-slate-50 px-4 py-2.5">
+          <div class="min-w-0">
+            <span class="text-sm font-semibold text-slate-600">{{ role.display_name }}</span>
+            {% if role.domain %}<span class="text-xs text-slate-400 ml-2">· {{ role.domain }}</span>{% endif %}
+          </div>
+          <span class="text-sm font-bold text-slate-500 tabular-nums shrink-0 ml-4">{{ role.fit_pct }}%</span>
+        </div>
+        {% endfor %}
+      </div>
+    </div>
+    {% endif %}
+
+  </div>
+  {% endif %}
+
+  {# ════════════════════════════════════════════════════════════
+     SECTION B — WHY RECRUITERS WOULD INTERVIEW YOU
+  ════════════════════════════════════════════════════════════ #}
+  {% if recruiter_summary and recruiter_summary.get('value_proposition') %}
+  <div class="bg-white rounded-2xl border border-slate-200 shadow-sm p-6 mb-6">
+    <h2 class="text-xs font-bold text-slate-700 uppercase tracking-widest mb-5 flex items-center gap-2">
+      <span class="text-violet-500">◈</span> Why Recruiters Would Interview You
+    </h2>
+    <div class="space-y-4">
+
+      <div class="rounded-xl border border-green-200 bg-green-50 p-4">
+        <div class="text-xs font-bold text-green-700 uppercase tracking-wide mb-1.5">Value Proposition</div>
+        <p class="text-sm text-slate-700 leading-relaxed">{{ recruiter_summary.value_proposition }}</p>
+      </div>
+
+      <div class="rounded-xl border border-blue-200 bg-blue-50 p-4">
+        <div class="text-xs font-bold text-blue-700 uppercase tracking-wide mb-1.5">Interview Rationale</div>
+        <p class="text-sm text-slate-700 leading-relaxed">{{ recruiter_summary.interview_rationale }}</p>
+      </div>
+
+      <div class="rounded-xl border border-orange-200 bg-orange-50 p-4">
+        <div class="text-xs font-bold text-orange-700 uppercase tracking-wide mb-1.5">Remaining Concerns</div>
+        <p class="text-sm text-slate-700 leading-relaxed">{{ recruiter_summary.remaining_concerns }}</p>
+      </div>
+
+    </div>
+  </div>
+  {% endif %}
+
+  {# ════════════════════════════════════════════════════════════
+     SECTION C — FASTEST ROUTE TO THE NEXT LEVEL
+  ════════════════════════════════════════════════════════════ #}
+  {% if shortest_path and not shortest_path.get('already_there') %}
+  <div class="bg-white rounded-2xl border border-slate-200 shadow-sm p-6 mb-6">
+    <h2 class="text-xs font-bold text-slate-700 uppercase tracking-widest mb-5 flex items-center gap-2">
+      <span class="text-brand-500 font-black">→</span> Fastest Route to the Next Level
+    </h2>
+
+    {# Score progress strip #}
+    <div class="flex items-center gap-4 mb-6 flex-wrap">
+      <div class="text-center">
+        <div class="text-2xl font-extrabold tabular-nums
+          {% if shortest_path.current_score >= 70 %}text-green-500
+          {% elif shortest_path.current_score >= 40 %}text-yellow-500
+          {% else %}text-red-500{% endif %}">{{ shortest_path.current_score }}%</div>
+        <div class="text-xs text-slate-400 mt-0.5">Current</div>
+      </div>
+      <div class="flex-1 min-w-[8rem] flex items-center gap-1">
+        <div class="flex-1 h-2 bg-slate-100 rounded-full overflow-hidden">
+          <div class="h-full rounded-full bg-brand-300" style="width: {{ shortest_path.current_score }}%"></div>
+        </div>
+        <span class="text-xs text-slate-400 px-1 shrink-0">→</span>
+        <div class="flex-1 h-2 bg-slate-100 rounded-full overflow-hidden">
+          <div class="h-full rounded-full bg-green-400" style="width: {{ shortest_path.projected_score }}%"></div>
+        </div>
+      </div>
+      <div class="text-center">
+        <div class="text-2xl font-extrabold text-green-500 tabular-nums">{{ shortest_path.projected_score }}%</div>
+        <div class="text-xs text-slate-400 mt-0.5">Projected</div>
+      </div>
+      <div class="text-center border-l border-slate-200 pl-4 ml-2">
+        <div class="text-2xl font-extrabold text-brand-600 tabular-nums">{{ shortest_path.estimated_weeks }}w</div>
+        <div class="text-xs text-slate-400 mt-0.5">Est. time</div>
+      </div>
+    </div>
+
+    {# ROI skills #}
+    {% if shortest_path.roi_skills %}
+    <div class="text-xs font-bold text-slate-500 uppercase tracking-wide mb-3">Highest ROI Skills</div>
+    <div class="space-y-2">
+      {% for skill in shortest_path.roi_skills %}
+      <div class="flex items-center gap-3 rounded-xl border border-slate-100 bg-slate-50 px-4 py-3 flex-wrap">
+        <div class="flex-1 min-w-0">
+          <span class="font-semibold text-slate-800 text-sm">{{ skill.display_name }}</span>
+        </div>
+        {% if skill.gap_type == 'foundational' %}
+        <span class="text-xs font-semibold px-2.5 py-0.5 rounded-full bg-rose-50 text-rose-700 border border-rose-200 shrink-0"
+          title="Core concepts that take months to develop.">Foundational</span>
+        {% elif skill.gap_type == 'domain' %}
+        <span class="text-xs font-semibold px-2.5 py-0.5 rounded-full bg-orange-50 text-orange-700 border border-orange-200 shrink-0"
+          title="Specialized knowledge areas that require weeks of focused study.">Domain</span>
+        {% else %}
+        <span class="text-xs font-semibold px-2.5 py-0.5 rounded-full bg-amber-50 text-amber-700 border border-amber-200 shrink-0"
+          title="Tools and frameworks that can be learned quickly with a project.">Tooling</span>
+        {% endif %}
+        <div class="text-center shrink-0 w-12">
+          <div class="text-xs font-bold text-slate-700">~{{ skill.weeks }}w</div>
+          <div class="text-xs text-slate-400">effort</div>
+        </div>
+        <div class="text-center shrink-0 w-14">
+          <div class="text-xs font-bold text-green-700">+{{ skill.impact_pts }}%</div>
+          <div class="text-xs text-slate-400">score</div>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+    {% endif %}
+
+    <p class="text-xs text-slate-400 mt-4 pt-4 border-t border-slate-100">
+      Estimates assume ~10 hours/week. Foundational gaps may take longer depending on prior mathematical background.
+    </p>
+  </div>
+  {% endif %}
+
+  {# ════════════════════════════════════════════════════════════
+     SECTION 2 — STRENGTHS + CONCERNS
+  ════════════════════════════════════════════════════════════ #}
+  {% if recruiter_summary and (recruiter_summary.strengths or recruiter_summary.concerns) %}
+  <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+
+    <div class="bg-white rounded-2xl border border-slate-200 shadow-sm p-6">
+      <h2 class="text-xs font-bold text-slate-700 uppercase tracking-widest mb-5 flex items-center gap-2">
+        <span class="w-5 h-5 rounded-full bg-green-100 flex items-center justify-center text-green-600 text-xs">✓</span>
+        Strengths
+      </h2>
+      {% if recruiter_summary.strengths %}
+      <div class="space-y-5">
+        {% for s in recruiter_summary.strengths %}
+        <div>
+          <div class="flex items-center justify-between mb-2">
+            <span class="text-sm font-semibold text-slate-700">{{ s.label }}</span>
+            <span class="text-xs font-bold text-green-700 bg-green-50 border border-green-200 rounded-full px-2 py-0.5">{{ s.coverage_pct }}% covered</span>
+          </div>
+          <div class="flex flex-wrap gap-1.5">
+            {% for skill_name in s.evidence %}
+            <span class="text-xs bg-green-50 text-green-700 border border-green-100 rounded-full px-2.5 py-0.5">{{ skill_name }}</span>
+            {% endfor %}
+          </div>
+        </div>
+        {% endfor %}
+      </div>
+      {% else %}
+      <p class="text-sm text-slate-400">Upload a more detailed resume to surface strength areas.</p>
+      {% endif %}
+    </div>
+
+    <div class="bg-white rounded-2xl border border-slate-200 shadow-sm p-6">
+      <h2 class="text-xs font-bold text-slate-700 uppercase tracking-widest mb-5 flex items-center gap-2">
+        <span class="w-5 h-5 rounded-full bg-orange-100 flex items-center justify-center text-orange-600 text-xs font-bold">!</span>
+        Areas to Develop
+      </h2>
+      {% if recruiter_summary.concerns %}
+      <div class="space-y-4">
+        {% for c in recruiter_summary.concerns %}
+        <div class="flex items-start justify-between gap-4">
+          <div>
+            <div class="text-sm font-semibold text-slate-700">{{ c.label }}</div>
+            <div class="text-xs text-slate-400 mt-0.5">{{ c.missing_count }} skill{{ 's' if c.missing_count != 1 else '' }} to develop</div>
+          </div>
+          <span class="shrink-0 text-xs font-bold text-orange-700 bg-orange-50 border border-orange-200 rounded-full px-2.5 py-0.5">{{ c.coverage_pct }}% covered</span>
+        </div>
+        {% endfor %}
+      </div>
+      {% else %}
+      <p class="text-sm text-slate-400">No major skill category concerns identified.</p>
+      {% endif %}
+    </div>
+
+  </div>
+  {% endif %}
+
+  {# ════════════════════════════════════════════════════════════
+     SECTION 2.5 — SOFT SKILLS INFERRED FROM EXPERIENCE
+  ════════════════════════════════════════════════════════════ #}
+  {% if soft_skill_inferences %}
+  <div class="bg-white rounded-2xl border border-slate-200 shadow-sm p-6 mb-6">
+    <h2 class="text-xs font-bold text-slate-700 uppercase tracking-widest mb-5 flex items-center gap-2">
+      <span class="w-5 h-5 rounded-full bg-violet-100 flex items-center justify-center text-violet-600 text-xs font-bold">◈</span>
+      Soft Skills — Inferred from Experience
+    </h2>
+    <div class="divide-y divide-slate-100">
+      {% for s in soft_skill_inferences %}
+      <div class="flex items-start gap-4 py-3 first:pt-0 last:pb-0">
+        <div class="flex-1 min-w-0">
+          <div class="flex items-center gap-2 mb-1">
+            <span class="font-semibold text-slate-700 text-sm">{{ s.skill }}</span>
+            <span class="text-xs text-violet-600 bg-violet-50 border border-violet-100 rounded-full px-2 py-0.5 tabular-nums">{{ (s.confidence * 100) | round }}%</span>
+          </div>
+          {% for snippet in s.evidence %}
+          <p class="text-xs text-slate-400 italic leading-relaxed truncate">"…{{ snippet }}…"</p>
+          {% endfor %}
+        </div>
+        <div class="shrink-0 w-16 pt-1">
+          <div class="w-full bg-slate-100 rounded-full h-1.5 overflow-hidden">
+            <div class="h-full rounded-full bg-violet-300" style="width: {{ (s.confidence * 100) | round }}%"></div>
+          </div>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+    <p class="text-xs text-slate-400 mt-4 pt-4 border-t border-slate-100">
+      Inferred from behavioral language patterns in your resume — not keyword matches.
+    </p>
+  </div>
+  {% endif %}
+
+  {# ════════════════════════════════════════════════════════════
+     SECTION 3 — PRIORITY GAPS WITH EVIDENCE
+  ════════════════════════════════════════════════════════════ #}
+  <div class="bg-white rounded-2xl border border-slate-200 shadow-sm p-6 mb-6">
+    <h2 class="text-xs font-bold text-slate-700 uppercase tracking-widest mb-5 flex items-center gap-2">
+      <span class="text-red-400">⚠</span> Priority Skill Gaps
+    </h2>
+
+    {% if gap_data.missing_skills %}
+    <div class="space-y-3">
+      {% for skill in gap_data.missing_skills[:10] %}
+      {% set ev = evidence_map.get(skill.skill_id, {}) %}
+      <div class="rounded-xl border border-slate-200 p-4 hover:border-slate-300 transition-colors">
+        <div class="flex items-start justify-between gap-4">
+          <div class="flex-1 min-w-0">
+            <div class="flex flex-wrap items-center gap-2 mb-2">
+              <span class="font-semibold text-slate-800 text-sm">{{ skill.display_name }}</span>
+              {# Gap status: skill graph adjacency > DB hierarchy > missing #}
+              {% if skill.get('gap_status') == 'adjacent_expertise' %}
+              <span class="text-xs font-semibold px-2 py-0.5 rounded-full bg-blue-50 text-blue-700 border border-blue-200">Adjacent Expertise</span>
+              {% if skill.get('via_skill') %}<span class="text-xs text-slate-400 italic">via {{ skill.via_skill }}</span>{% endif %}
+              {% elif skill.get('gap_status') == 'transferable' %}
+              <span class="text-xs font-semibold px-2 py-0.5 rounded-full bg-sky-50 text-sky-700 border border-sky-200">Transferable</span>
+              {% if skill.get('via_skill') %}<span class="text-xs text-slate-400 italic">from {{ skill.via_skill }}</span>{% endif %}
+              {% elif skill.get('gap_status') == 'partial_match' %}
+              <span class="text-xs font-semibold px-2 py-0.5 rounded-full bg-yellow-50 text-yellow-700 border border-yellow-200">Adjacent Knowledge</span>
+              {% elif skill.get('gap_status') == 'related' %}
+              <span class="text-xs font-semibold px-2 py-0.5 rounded-full bg-orange-50 text-orange-600 border border-orange-200">Related Domain</span>
+              {% else %}
+              <span class="text-xs font-semibold px-2 py-0.5 rounded-full bg-red-50 text-red-500 border border-red-100">Missing</span>
+              {% endif %}
+              {# Impact badge #}
+              {% if skill.importance_score >= 0.7 %}
+              <span class="text-xs font-semibold px-2 py-0.5 rounded-full bg-red-50 text-red-600 border border-red-200">High Impact</span>
+              {% elif skill.importance_score >= 0.4 %}
+              <span class="text-xs font-semibold px-2 py-0.5 rounded-full bg-yellow-50 text-yellow-600 border border-yellow-200">Medium Impact</span>
+              {% else %}
+              <span class="text-xs font-semibold px-2 py-0.5 rounded-full bg-slate-100 text-slate-500">Low Impact</span>
+              {% endif %}
+              {# Gap severity type badge #}
+              {% if skill.get('gap_type') == 'foundational' %}
+              <span class="text-xs font-semibold px-2 py-0.5 rounded-full bg-rose-50 text-rose-700 border border-rose-200"
+                title="Core concepts that take months to develop.">Foundational</span>
+              {% elif skill.get('gap_type') == 'domain' %}
+              <span class="text-xs font-semibold px-2 py-0.5 rounded-full bg-orange-50 text-orange-700 border border-orange-200"
+                title="Specialized knowledge areas that require weeks of focused study.">Domain</span>
+              {% elif skill.get('gap_type') == 'tooling' %}
+              <span class="text-xs font-semibold px-2 py-0.5 rounded-full bg-amber-50 text-amber-700 border border-amber-200"
+                title="Tools and frameworks that can be learned quickly with a project.">Tooling</span>
+              {% endif %}
+              {% if skill.category %}
+              <span class="text-xs text-slate-400 bg-slate-50 border border-slate-200 rounded-full px-2 py-0.5">{{ skill.category }}</span>
+              {% endif %}
+            </div>
+            {% if ev %}
+            <div class="space-y-1.5 mt-1">
+              {% if ev.why %}
+              <p class="text-xs text-slate-500 leading-relaxed">
+                <span class="font-semibold text-slate-600">Why it matters: </span>{{ ev.why }}
+              </p>
+              {% endif %}
+              {# graph_note: recruiter-grade shortcut explanation from skill_graph #}
+              {% if ev.graph_note %}
+              <p class="text-xs text-blue-600 leading-relaxed">
+                <span class="font-semibold">↯ Shortcut: </span>{{ ev.graph_note }}
+              </p>
+              {% endif %}
+              {% if ev.related_found %}
+              <p class="text-xs text-slate-500">
+                <span class="font-semibold text-slate-600">You have: </span>
+                {% for r in ev.related_found %}<span class="inline-block bg-blue-50 text-blue-600 border border-blue-100 rounded-full px-2 py-0.5 mr-1 mb-0.5">{{ r }}</span>{% endfor %}
+                <span class="text-slate-400">— adjacent skills that accelerate learning</span>
+              </p>
+              {% endif %}
+            </div>
+            {% endif %}
+          </div>
+          <div class="shrink-0 flex flex-col items-end gap-1 pt-0.5">
+            <div class="w-16 bg-slate-100 rounded-full h-1.5 overflow-hidden">
+              <div class="h-full rounded-full bg-red-300" style="width: {{ (skill.importance_score * 100) | round }}%"></div>
+            </div>
+            <span class="text-xs text-slate-400">{{ (skill.importance_score * 100) | round }}%</span>
+          </div>
+        </div>
+      </div>
+      {% endfor %}
+      {% if gap_data.missing_skills | length > 10 %}
+      <p class="text-xs text-slate-400 pt-1 pl-1">… and {{ (gap_data.missing_skills | length) - 10 }} more gaps addressed in the roadmap below.</p>
+      {% endif %}
+    </div>
+
+    {% else %}
+    <div class="text-center py-10">
+      <div class="text-4xl mb-3">🎉</div>
+      <p class="text-sm font-semibold text-green-600 mb-1">No significant gaps found.</p>
+      <p class="text-sm text-slate-500">You already match the core skill requirements.</p>
+    </div>
+    {% endif %}
+  </div>
+
+  {# ════════════════════════════════════════════════════════════
+     SECTION 4 — SKILLS YOU HAVE
+  ════════════════════════════════════════════════════════════ #}
+  <div class="bg-white rounded-2xl border border-slate-200 shadow-sm p-6 mb-6">
+    <h2 class="text-xs font-bold text-slate-700 uppercase tracking-widest mb-5 flex items-center gap-2">
+      <span class="text-green-500">✓</span> Skills You Have
+    </h2>
+
+    {% if gap_data.matched_skills %}
+    <div class="flex flex-wrap gap-2 mb-5">
+      {% for skill in gap_data.matched_skills %}
+      <span class="inline-flex items-center gap-1.5 text-sm bg-green-50 text-green-700 border border-green-200 rounded-full px-3 py-1">
+        {{ skill.display_name }}
+        <span class="text-xs text-green-400 tabular-nums">{{ (skill.confidence * 100) | round }}%</span>
+      </span>
+      {% endfor %}
+    </div>
+
+    {# ── F3: Evidence trace — where each skill was found in the resume ── #}
+    {% set has_evidence = namespace(found=false) %}
+    {% for skill in gap_data.matched_skills %}{% if skill_evidence.get(skill.skill_id) %}{% set has_evidence.found = true %}{% endif %}{% endfor %}
+    {% if has_evidence.found %}
+    <div class="pt-4 border-t border-slate-100">
+      <div class="text-xs font-bold text-slate-500 uppercase tracking-wide mb-3">Evidence Trace</div>
+      <div class="space-y-1.5">
+        {% for skill in gap_data.matched_skills %}
+        {% set ev = skill_evidence.get(skill.skill_id) %}
+        {% if ev %}
+        <div class="flex items-start gap-2 text-xs">
+          <span class="font-semibold text-slate-700 w-28 shrink-0 truncate">{{ skill.display_name }}</span>
+          <span class="text-slate-300 shrink-0">›</span>
+          <span class="text-brand-600 font-medium shrink-0">{{ ev.section }}</span>
+          <span class="text-slate-300 shrink-0">·</span>
+          <span class="text-slate-400 italic truncate">{{ ev.snippet }}</span>
+        </div>
+        {% endif %}
+        {% endfor %}
+      </div>
+    </div>
+    {% endif %}
+    {% else %}
+    <p class="text-sm text-slate-400">No matching skills detected. Try uploading a more detailed resume.</p>
+    {% endif %}
+
+    {% if gap_data.bonus_skills %}
+    <div class="mt-6 pt-5 border-t border-slate-100">
+      <h3 class="text-xs font-bold text-slate-500 uppercase tracking-wide mb-3">
+        Bonus Skills <span class="font-normal normal-case text-slate-400 ml-1">— not required for this role but show depth</span>
+      </h3>
+      <div class="flex flex-wrap gap-2">
+        {% for skill in gap_data.bonus_skills[:15] %}
+        <span class="text-sm bg-blue-50 text-blue-700 border border-blue-200 rounded-full px-3 py-1">{{ skill.display_name }}</span>
+        {% endfor %}
+        {% if gap_data.bonus_skills | length > 15 %}
+        <span class="text-sm text-slate-400 flex items-center pl-1">+{{ (gap_data.bonus_skills | length) - 15 }} more</span>
+        {% endif %}
+      </div>
+    </div>
+    {% endif %}
+  </div>
+
+  {# ════════════════════════════════════════════════════════════
+     SECTION 5 — RECOMMENDED PROJECTS
+  ════════════════════════════════════════════════════════════ #}
+  {% if project_recommendations %}
+  <div class="mb-6">
+    <div class="flex items-center justify-between mb-4">
+      <h2 class="text-xs font-bold text-slate-700 uppercase tracking-widest flex items-center gap-2">
+        🔧 Recommended Projects
+      </h2>
+      <span class="text-xs text-slate-400">Build these to close critical gaps</span>
+    </div>
+    <div class="grid grid-cols-1 {% if project_recommendations | length >= 3 %}lg:grid-cols-3{% elif project_recommendations | length == 2 %}lg:grid-cols-2{% endif %} gap-4">
+      {% for project in project_recommendations %}
+      <div class="bg-white rounded-2xl border border-slate-200 shadow-sm p-5 hover:border-brand-300 transition-colors flex flex-col">
+        <div class="flex items-start justify-between mb-3">
+          <h3 class="font-bold text-slate-800 text-sm leading-snug flex-1 pr-3">{{ project.title }}</h3>
+          <span class="shrink-0 text-xs font-bold px-2.5 py-0.5 rounded-full
+            {% if project.recruiter_value == 'High' %}bg-green-50 text-green-700 border border-green-200
+            {% elif project.recruiter_value == 'Medium' %}bg-yellow-50 text-yellow-700 border border-yellow-200
+            {% else %}bg-slate-100 text-slate-500{% endif %}">{{ project.recruiter_value }} ROI</span>
+        </div>
+        {% if project.get('why_this_project') %}
+        <p class="text-xs text-brand-600 font-medium italic leading-relaxed mb-2.5 bg-brand-50 rounded-lg px-2.5 py-1.5">{{ project.why_this_project }}</p>
+        {% endif %}
+        <p class="text-xs text-slate-500 leading-relaxed mb-4 flex-1">{{ project.description }}</p>
+        {% if project.foundation_skills %}
+        <div class="mb-3">
+          <div class="text-xs font-semibold text-slate-500 mb-1.5">Builds on what you know:</div>
+          <div class="flex flex-wrap gap-1">
+            {% for skill_name in project.foundation_skills %}
+            <span class="text-xs bg-green-50 text-green-700 border border-green-100 rounded-full px-2 py-0.5">{{ skill_name }}</span>
+            {% endfor %}
+          </div>
+        </div>
+        {% endif %}
+        {% if project.matched_gaps %}
+        <div class="mb-3">
+          <div class="text-xs font-semibold text-slate-500 mb-1.5">Bridges gaps:</div>
+          <div class="flex flex-wrap gap-1">
+            {% for gap_name in project.matched_gaps %}
+            <span class="text-xs bg-red-50 text-red-600 border border-red-100 rounded-full px-2 py-0.5">{{ gap_name }}</span>
+            {% endfor %}
+          </div>
+        </div>
+        {% endif %}
+        {% if project.deliverables %}
+        <div class="mb-4">
+          <div class="text-xs font-semibold text-slate-500 mb-1.5">Deliverables:</div>
+          <ul class="space-y-1">
+            {% for d in project.deliverables %}
+            <li class="text-xs text-slate-600 flex items-start gap-1.5"><span class="text-slate-300 mt-0.5 shrink-0">→</span>{{ d }}</li>
+            {% endfor %}
+          </ul>
+        </div>
+        {% endif %}
+        <div class="flex items-center gap-2 pt-3 border-t border-slate-100 text-xs text-slate-400 mt-auto flex-wrap">
+          <span>{{ project.difficulty }}</span>
+          <span>·</span>
+          <span>~{{ project.estimated_hours }}h</span>
+          <span>·</span>
+          <span class="text-brand-500 font-medium">{{ project.portfolio_artifact }}</span>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+  {% endif %}
+
+  {# ════════════════════════════════════════════════════════════
+     SECTION 6 — LEARNING ROADMAP
+     Renders phase-based (v2 prompt) or week-based (template fallback) — whichever is present.
+  ════════════════════════════════════════════════════════════ #}
+  {% if roadmap and (roadmap.get('phases') or roadmap.get('weeks')) %}
+  <div class="bg-white rounded-2xl border border-slate-200 shadow-sm p-8 mb-6">
+    <div class="flex items-start justify-between mb-6">
+      <div>
+        <h2 class="text-xs font-bold text-slate-700 uppercase tracking-widest mb-1">📍 Learning Roadmap</h2>
+        <p class="font-semibold text-slate-800">{{ roadmap.get('title', 'Your Personalized Roadmap') }}</p>
+        {% if roadmap.get('summary') %}
+        <p class="text-sm text-slate-500 mt-1">{{ roadmap.get('summary') }}</p>
+        {% endif %}
+      </div>
+      <span class="shrink-0 text-xs text-slate-500 bg-slate-50 border border-slate-200 rounded-full px-3 py-1">
+        {{ roadmap.get('total_duration_weeks', (roadmap.get('weeks') or []) | length) }} weeks
+      </span>
+    </div>
+
+    {# ── Phase-based roadmap (v2 prompt, 4 strategic phases) ── #}
+    {% if roadmap.get('phases') %}
+    <div class="space-y-3">
+      {% for phase in roadmap.phases %}
+      {% set phase_num = phase.get('phase_number', loop.index) %}
+      <details class="group border border-slate-200 rounded-xl overflow-hidden" {% if loop.index == 1 %}open{% endif %}>
+        <summary class="flex items-center justify-between p-5 cursor-pointer hover:bg-slate-50 transition-colors [list-style:none]">
+          <div class="flex items-center gap-3">
+            <span class="w-8 h-8 rounded-full flex items-center justify-center text-xs font-bold shrink-0
+              {% if phase_num == 1 %}bg-brand-50 border border-brand-200 text-brand-700
+              {% elif phase_num == 2 %}bg-amber-50 border border-amber-200 text-amber-700
+              {% elif phase_num == 3 %}bg-violet-50 border border-violet-200 text-violet-700
+              {% else %}bg-green-50 border border-green-200 text-green-700{% endif %}">{{ phase_num }}</span>
+            <div>
+              <div class="text-xs font-semibold uppercase tracking-wide
+                {% if phase_num == 1 %}text-brand-600
+                {% elif phase_num == 2 %}text-amber-600
+                {% elif phase_num == 3 %}text-violet-600
+                {% else %}text-green-600{% endif %}">
+                Phase {{ phase_num }}{% if phase.get('duration_weeks') %} · {{ phase.duration_weeks }}w{% endif %}
+              </div>
+              <div class="font-semibold text-slate-800 text-sm mt-0.5">{{ phase.get('title', '') }}</div>
+            </div>
+          </div>
+          <svg class="w-4 h-4 text-slate-400 transition-transform group-open:rotate-180 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
+          </svg>
+        </summary>
+
+        <div class="px-5 pb-5 border-t border-slate-100">
+          {% if phase.get('goal') %}
+          <p class="text-sm text-slate-600 leading-relaxed mt-4 mb-4">{{ phase.goal }}</p>
+          {% endif %}
+
+          {% if phase.get('builds_on') %}
+          <div class="mb-3">
+            <div class="text-xs font-semibold text-slate-500 mb-1.5">Builds on:</div>
+            <div class="flex flex-wrap gap-1.5">
+              {% for item in phase.builds_on %}
+              <span class="text-xs bg-green-50 text-green-700 border border-green-100 rounded-full px-2.5 py-0.5">{{ item }}</span>
+              {% endfor %}
+            </div>
+          </div>
+          {% endif %}
+
+          {% if phase.get('closes_gaps') %}
+          <div class="mb-4">
+            <div class="text-xs font-semibold text-slate-500 mb-1.5">Closes gaps:</div>
+            <div class="flex flex-wrap gap-1.5">
+              {% for item in phase.closes_gaps %}
+              <span class="text-xs bg-red-50 text-red-600 border border-red-100 rounded-full px-2.5 py-0.5">{{ item }}</span>
+              {% endfor %}
+            </div>
+          </div>
+          {% endif %}
+
+          {% if phase.get('actions') %}
+          <ul class="space-y-2 mb-4">
+            {% for action in phase.actions %}
+            <li class="flex items-start gap-2 text-sm text-slate-600">
+              <span class="text-brand-400 mt-0.5 shrink-0">→</span>{{ action }}
+            </li>
+            {% endfor %}
+          </ul>
+          {% endif %}
+
+          {% if phase.get('deliverable') %}
+          <div class="mt-4 p-4 bg-slate-50 rounded-xl border border-slate-200">
+            <div class="text-xs font-bold text-slate-500 uppercase tracking-wide mb-1">Deliverable</div>
+            <div class="text-sm font-semibold text-slate-800">{{ phase.deliverable }}</div>
+            {% if phase.get('deploy_target') %}
+            <p class="text-xs text-brand-600 font-medium mt-1.5">Deploy to: {{ phase.deploy_target }}</p>
+            {% endif %}
+          </div>
+          {% endif %}
+
+          {% if phase.get('resources') %}
+          <div class="mt-4 pt-4 border-t border-slate-100">
+            <div class="text-xs font-bold text-slate-500 uppercase tracking-wide mb-3">Resources</div>
+            <div class="space-y-2">
+              {% for res in phase.resources %}
+              <div class="flex items-center gap-2 text-sm flex-wrap">
+                <span class="text-slate-400 text-xs">📘</span>
+                {% if res.get('url') %}
+                <a href="{{ res.url }}" target="_blank" rel="noopener noreferrer" class="text-brand-600 hover:underline">{{ res.get('title', '') }}</a>
+                {% else %}
+                <span class="text-slate-700">{{ res.get('title', '') }}</span>
+                {% endif %}
+                <span class="text-xs text-slate-400">— {{ res.get('platform', '') }}</span>
+                {% if res.get('estimated_hours') %}<span class="text-xs text-slate-400">(~{{ res.estimated_hours }}h)</span>{% endif %}
+              </div>
+              {% endfor %}
+            </div>
+          </div>
+          {% endif %}
+        </div>
+      </details>
+      {% endfor %}
+    </div>
+
+    {# ── Week-based roadmap (template fallback or v1 prompt) ── #}
+    {% elif roadmap.get('weeks') %}
+    <div class="space-y-3">
+      {% for week in (roadmap.get('weeks') or []) %}
+      <details class="group border border-slate-200 rounded-xl overflow-hidden" {% if loop.index == 1 %}open{% endif %}>
+        <summary class="flex items-center justify-between p-5 cursor-pointer hover:bg-slate-50 transition-colors [list-style:none]">
+          <div class="flex items-center gap-3">
+            <span class="w-8 h-8 rounded-full bg-brand-50 border border-brand-200 flex items-center justify-center text-xs font-bold text-brand-700 shrink-0">{{ week.week_number }}</span>
+            <div>
+              <div class="text-xs font-semibold text-brand-600 uppercase tracking-wide">Week {{ week.week_number }}</div>
+              <div class="font-semibold text-slate-800 text-sm mt-0.5">{{ week.focus }}</div>
+            </div>
+          </div>
+          <svg class="w-4 h-4 text-slate-400 transition-transform group-open:rotate-180 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
+          </svg>
+        </summary>
+
+        <div class="px-5 pb-5 border-t border-slate-100">
+          {% if week.skills %}
+          <div class="flex flex-wrap gap-2 mt-4 mb-4">
+            {% for sk in week.skills %}
+            <span class="text-xs bg-brand-50 text-brand-700 border border-brand-200 rounded-full px-2.5 py-1">{{ sk }}</span>
+            {% endfor %}
+          </div>
+          {% endif %}
+
+          {# ── F8: Learn / Build / Deploy / Showcase (v2 roadmaps) ── #}
+          {% if week.get('learn') or week.get('build') or week.get('deploy') or week.get('showcase') %}
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-2 mt-4 mb-4">
+            {% if week.get('learn') %}
+            <div class="bg-blue-50 rounded-xl p-3 border border-blue-100">
+              <div class="text-xs font-bold text-blue-600 uppercase tracking-wide mb-1.5">📚 Learn</div>
+              <ul class="space-y-1">
+                {% for item in week.learn %}
+                <li class="text-xs text-slate-600 leading-relaxed">{{ item }}</li>
+                {% endfor %}
+              </ul>
+            </div>
+            {% endif %}
+            {% if week.get('build') %}
+            <div class="bg-amber-50 rounded-xl p-3 border border-amber-100">
+              <div class="text-xs font-bold text-amber-600 uppercase tracking-wide mb-1.5">🔨 Build</div>
+              <p class="text-xs text-slate-600 leading-relaxed">{{ week.build }}</p>
+            </div>
+            {% endif %}
+            {% if week.get('deploy') %}
+            <div class="bg-green-50 rounded-xl p-3 border border-green-100">
+              <div class="text-xs font-bold text-green-600 uppercase tracking-wide mb-1.5">🚀 Deploy</div>
+              <p class="text-xs text-slate-600 leading-relaxed">{{ week.deploy }}</p>
+            </div>
+            {% endif %}
+            {% if week.get('showcase') %}
+            <div class="bg-purple-50 rounded-xl p-3 border border-purple-100">
+              <div class="text-xs font-bold text-purple-600 uppercase tracking-wide mb-1.5">🌟 Showcase</div>
+              <p class="text-xs text-slate-600 leading-relaxed">{{ week.showcase }}</p>
+            </div>
+            {% endif %}
+          </div>
+          {% endif %}
+
+          {% if week.tasks %}
+          <ul class="space-y-2 mb-4">
+            {% for t in week.tasks %}
+            <li class="flex items-start gap-2 text-sm text-slate-600">
+              <span class="text-brand-400 mt-0.5 shrink-0">→</span>{{ t }}
+            </li>
+            {% endfor %}
+          </ul>
+          {% endif %}
+
+          {% if week.get('project') %}
+          {% set proj = week.get('project') %}
+          <div class="mt-4 p-4 bg-slate-50 rounded-xl border border-slate-200">
+            <div class="text-xs font-bold text-slate-500 uppercase tracking-wide mb-2">Project</div>
+            {% if proj is mapping %}
+            <div class="font-semibold text-slate-800 text-sm mb-2">{{ proj.get('title', '') }}</div>
+            {% if proj.get('deliverables') %}
+            <ul class="space-y-1 mb-2">
+              {% for d in proj.get('deliverables', []) %}
+              <li class="text-xs text-slate-600 flex items-start gap-1.5"><span class="text-slate-400 shrink-0">·</span>{{ d }}</li>
+              {% endfor %}
+            </ul>
+            {% endif %}
+            {% if proj.get('success_metric') %}
+            <p class="text-xs text-slate-500 mt-2"><span class="font-semibold">Success:</span> {{ proj.get('success_metric') }}</p>
+            {% endif %}
+            {% if proj.get('portfolio_artifact') %}
+            <p class="text-xs text-brand-600 font-medium mt-1">📦 {{ proj.get('portfolio_artifact') }}</p>
+            {% endif %}
+            {% else %}
+            <div class="font-semibold text-slate-800 text-sm">{{ proj }}</div>
+            {% endif %}
+          </div>
+          {% endif %}
+
+          {% if week.resources %}
+          <div class="mt-4 pt-4 border-t border-slate-100">
+            <div class="text-xs font-bold text-slate-500 uppercase tracking-wide mb-3">Resources</div>
+            <div class="space-y-2">
+              {% for res in week.resources %}
+              <div class="flex items-center gap-2 text-sm flex-wrap">
+                <span class="text-slate-400 text-xs">📘</span>
+                {% if res.url %}
+                <a href="{{ res.url }}" target="_blank" rel="noopener noreferrer" class="text-brand-600 hover:underline">{{ res.title }}</a>
+                {% else %}
+                <span class="text-slate-700">{{ res.title }}</span>
+                {% endif %}
+                <span class="text-xs text-slate-400">— {{ res.platform }}</span>
+                {% if res.estimated_hours %}<span class="text-xs text-slate-400">(~{{ res.estimated_hours }}h)</span>{% endif %}
+              </div>
+              {% endfor %}
+            </div>
+          </div>
+          {% endif %}
+        </div>
+      </details>
+      {% endfor %}
+    </div>
+    {% endif %}
+
+    {% if roadmap.get('success_metrics') %}
+    <div class="mt-6 p-4 bg-green-50 border border-green-200 rounded-xl">
+      <h3 class="text-xs font-bold text-green-800 uppercase tracking-wide mb-3">Success Metrics</h3>
+      <ul class="space-y-1.5">
+        {% for metric in roadmap.success_metrics %}
+        <li class="text-sm text-green-700 flex items-start gap-2"><span class="shrink-0 font-bold">✓</span>{{ metric }}</li>
+        {% endfor %}
+      </ul>
+    </div>
+    {% endif %}
+  </div>
+  {% endif %}
+
+  {# ════════════════════════════════════════════════════════════
+     SECTION 7 — CTA + PRIVACY NOTICE
+  ════════════════════════════════════════════════════════════ #}
+  <div class="text-center py-8">
+    <p class="text-slate-500 mb-5">Updated your resume? Re-upload to see your score change.</p>
+    <a href="/" class="inline-block bg-brand-600 text-white font-semibold px-8 py-3 rounded-xl hover:bg-brand-700 transition-colors">
+      Re-Upload Resume →
+    </a>
+    <p class="text-xs text-slate-400 mt-5">
+      🔒 Uploaded resumes are automatically deleted after processing and never retained longer than 15 minutes.
+    </p>
+  </div>
+
+</div>
+{% endblock %}

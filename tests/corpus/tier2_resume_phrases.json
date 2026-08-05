@@ -1,0 +1,180 @@
+{
+  "_comment": "Tier 2: Realistic resume phrases. expected_canonicals must ALL be found by alias scan (recall target).",
+  "phrases": [
+    {
+      "text": "Built microservices using Go and deployed on Docker with Kubernetes orchestration",
+      "expected_canonicals": ["go", "docker", "kubernetes"],
+      "description": "Go + Docker + Kubernetes in microservices context"
+    },
+    {
+      "text": "Containerized applications using Docker CE and orchestrated with k8s on AWS EKS",
+      "expected_canonicals": ["docker", "kubernetes"],
+      "description": "Docker CE alias and k8s alias together"
+    },
+    {
+      "text": "Developed REST APIs with FastAPI and SQLAlchemy on PostgreSQL, cached with Redis",
+      "expected_canonicals": ["fastapi", "postgresql", "redis"],
+      "description": "FastAPI + PostgreSQL + Redis backend stack"
+    },
+    {
+      "text": "Full-stack development with React, Node.js, and MongoDB",
+      "expected_canonicals": ["react", "nodejs", "mongodb"],
+      "description": "MERN stack: React + Node.js + MongoDB"
+    },
+    {
+      "text": "Machine learning pipeline with sklearn, pandas, and numpy for feature engineering",
+      "expected_canonicals": ["scikit_learn", "pandas", "numpy"],
+      "description": "sklearn alias + pandas + numpy"
+    },
+    {
+      "text": "Deep learning models in PyTorch (torch) and TensorFlow (tf) with GPU acceleration",
+      "expected_canonicals": ["pytorch", "tensorflow"],
+      "description": "torch and tf aliases in parentheses"
+    },
+    {
+      "text": "Infrastructure as code using Terraform and Ansible on AWS",
+      "expected_canonicals": ["terraform", "ansible", "aws"],
+      "description": "IaC tools with cloud provider"
+    },
+    {
+      "text": "CI/CD pipelines with GitHub Actions, Docker builds, and deployment to Kubernetes",
+      "expected_canonicals": ["github_actions", "docker", "kubernetes"],
+      "description": "CI/CD pipeline description"
+    },
+    {
+      "text": "Data warehousing with Snowflake, dbt transformations, and Apache Airflow orchestration",
+      "expected_canonicals": ["snowflake", "dbt", "apache_airflow"],
+      "description": "Modern data stack"
+    },
+    {
+      "text": "LLM applications with LangChain, OpenAI API, and pgvector for RAG pipelines",
+      "expected_canonicals": ["langchain", "openai_sdk", "pgvector", "rag"],
+      "description": "AI/RAG application stack"
+    },
+    {
+      "text": "Built scalable APIs with Spring Boot and PostgreSQL, deployed on AWS ECS with Docker",
+      "expected_canonicals": ["springboot", "postgresql", "aws_ecs", "docker"],
+      "description": "Java Spring Boot stack"
+    },
+    {
+      "text": "Frontend development with TypeScript, React, and Tailwind CSS using Next.js",
+      "expected_canonicals": ["typescript", "react", "tailwindcss", "nextjs"],
+      "description": "Modern frontend stack"
+    },
+    {
+      "text": "Monitoring and observability with Prometheus, Grafana, and OpenTelemetry",
+      "expected_canonicals": ["prometheus", "grafana", "opentelemetry"],
+      "description": "Observability stack"
+    },
+    {
+      "text": "Message queuing with Apache Kafka and Redis Streams for event-driven architecture",
+      "expected_canonicals": ["apache_kafka", "redis_streams"],
+      "description": "Event-driven messaging"
+    },
+    {
+      "text": "Python backend with Django ORM, Celery task queue, and Redis broker",
+      "expected_canonicals": ["django", "celery", "redis"],
+      "description": "Django + Celery + Redis stack"
+    },
+    {
+      "text": "GraphQL API design with Node.js and Apollo Server",
+      "expected_canonicals": ["graphql", "nodejs"],
+      "description": "GraphQL with Node.js"
+    },
+    {
+      "text": "MLflow experiment tracking, DVC version control, and Weights & Biases reporting",
+      "expected_canonicals": ["mlflow", "dvc", "wandb"],
+      "description": "MLOps toolchain"
+    },
+    {
+      "text": "Managed Postgres databases, Redis caches, and Elasticsearch indices",
+      "expected_canonicals": ["postgresql", "redis", "elasticsearch"],
+      "description": "postgres/redis/elasticsearch aliases"
+    },
+    {
+      "text": "Vue.js frontend with Pinia state management and Vite bundler",
+      "expected_canonicals": ["vuejs", "vite"],
+      "description": "Vue.js stack"
+    },
+    {
+      "text": "Streaming data pipelines using Apache Spark (PySpark) and Apache Kafka",
+      "expected_canonicals": ["apache_spark", "apache_kafka"],
+      "description": "PySpark alias and Kafka"
+    },
+    {
+      "text": "Serverless functions with AWS Lambda, API Gateway, and DynamoDB",
+      "expected_canonicals": ["aws_lambda", "dynamodb"],
+      "description": "AWS serverless stack"
+    },
+    {
+      "text": "Kubernetes deployment with Helm charts, ArgoCD gitops, and Istio service mesh",
+      "expected_canonicals": ["kubernetes", "helm", "argocd", "istio"],
+      "description": "Advanced Kubernetes toolchain"
+    },
+    {
+      "text": "NLP pipelines with Hugging Face Transformers and spaCy for text classification",
+      "expected_canonicals": ["huggingface", "spacy"],
+      "description": "NLP toolchain with HF alias"
+    },
+    {
+      "text": "Security hardening: JWT authentication, OAuth 2.0 flows, and OWASP compliance",
+      "expected_canonicals": ["jwt", "oauth2", "owasp"],
+      "description": "Security skills"
+    },
+    {
+      "text": "gRPC services with Protocol Buffers between Python and Go microservices",
+      "expected_canonicals": ["grpc", "go"],
+      "description": "gRPC + protobuf + Go"
+    },
+    {
+      "text": "C# .NET backend with Azure Functions, Cosmos DB, and Azure Service Bus",
+      "expected_canonicals": ["csharp", "azure_functions", "azure_cosmosdb", "azure_service_bus"],
+      "description": "C# Azure stack"
+    },
+    {
+      "text": "React Native mobile app with Expo, TypeScript, and Firebase backend",
+      "expected_canonicals": ["react_native", "expo", "typescript", "firebase"],
+      "description": "React Native mobile stack"
+    },
+    {
+      "text": "Data analysis with pandas DataFrames, matplotlib visualizations, and Jupyter notebooks",
+      "expected_canonicals": ["pandas", "matplotlib", "jupyter"],
+      "description": "Data science notebook workflow"
+    },
+    {
+      "text": "Embedded C++ systems programming on ARM with FreeRTOS",
+      "expected_canonicals": ["cpp"],
+      "description": "C++ in embedded context"
+    },
+    {
+      "text": "Infrastructure monitoring with Datadog APM, distributed tracing, and alerting",
+      "expected_canonicals": ["datadog"],
+      "description": "Datadog APM"
+    },
+    {
+      "text": "Vector search with pgvector embeddings and Pinecone for semantic retrieval",
+      "expected_canonicals": ["pgvector", "pinecone", "vector_search"],
+      "description": "Vector DB and semantic search"
+    },
+    {
+      "text": "Fine-tuning LLMs with LoRA/QLoRA, PEFT, and Hugging Face Transformers",
+      "expected_canonicals": ["fine_tuning", "huggingface"],
+      "description": "LLM fine-tuning workflow"
+    },
+    {
+      "text": "Test-driven development with pytest, unittest, and Testcontainers for integration tests",
+      "expected_canonicals": ["pytest", "unittest", "testcontainers"],
+      "description": "Python testing stack"
+    },
+    {
+      "text": "Ruby on Rails API with PostgreSQL and Sidekiq background jobs",
+      "expected_canonicals": ["rails", "postgresql"],
+      "description": "Rails API stack (ror alias)"
+    },
+    {
+      "text": "Rust async services with Tokio runtime and Axum web framework",
+      "expected_canonicals": ["rust", "axum"],
+      "description": "Rust async stack"
+    }
+  ]
+}

@@ -1,35 +1,504 @@
-skill
-python
-java
-c++
-javascript
-react
-angular
-vue
-node.js
-fastapi
-flask
-django
-sql
-mysql
-postgresql
-mongodb
-docker
-kubernetes
-aws
-gcp
-azure
-ci/cd
-git
-linux
-machine learning
-data analysis
-pandas
-numpy
-tensorflow
-pytorch
-project management
-agile
-scrum
-matlab
-r
+canonical_name,display_name,category,subcategory,aliases
+python,Python,programming_languages,general,py|python3|python 3|python2|python programming|cpython
+javascript,JavaScript,programming_languages,general,js|es6|es2015|ecmascript|vanilla js|vanillajs|javascript language
+typescript,TypeScript,programming_languages,general,ts|typed javascript|typescript language|ts lang
+java,Java,programming_languages,general,java language|java programming|core java|java se|java ee|jakarta ee|java 17|java 21
+c,C,programming_languages,systems,c language|c programming|ansi c|c99|c11|c stdlib
+cpp,C++,programming_languages,systems,c plus plus|c++ language|cpp language|c++11|c++14|c++17|c++20|c++23
+csharp,C#,programming_languages,general,c sharp|c# language|dotnet c#|.net c#|csharp language
+go,Go,programming_languages,general,golang|go language|go programming|go lang
+rust,Rust,programming_languages,systems,rust language|rust programming|rustlang|rust-lang
+ruby,Ruby,programming_languages,general,ruby language|ruby programming|mri ruby|ruby mri
+php,PHP,programming_languages,web,php language|php programming|php 8|php 7|php scripting
+swift,Swift,programming_languages,mobile,swift language|swift programming|apple swift|swift ios
+kotlin,Kotlin,programming_languages,mobile,kotlin language|kotlin programming|jvm kotlin|kotlin android
+scala,Scala,programming_languages,general,scala language|scala programming|typesafe scala|scala jvm
+r,R,programming_languages,data,r language|r programming|rlang|r statistical computing|r stats
+matlab,MATLAB,programming_languages,data,matlab language|mathworks matlab|matlab programming|octave
+perl,Perl,programming_languages,general,perl language|perl 5|perl programming|perl scripting
+lua,Lua,programming_languages,general,lua language|lua scripting|lua programming
+haskell,Haskell,programming_languages,functional,haskell language|functional haskell|haskell programming
+elixir,Elixir,programming_languages,functional,elixir language|elixir programming|elixir beam
+dart,Dart,programming_languages,mobile,dart language|dart programming|flutter dart|dart sdk
+julia,Julia,programming_languages,data,julia language|julia programming|julialang|julia scientific
+groovy,Groovy,programming_languages,general,groovy language|groovy jvm|apache groovy|groovy scripting
+bash,Bash,programming_languages,scripting,bash scripting|shell scripting|bash script|shell script|sh|bash shell
+powershell,PowerShell,programming_languages,scripting,powershell scripting|pwsh|ps1|windows powershell|powershell core
+sql,SQL,programming_languages,data,structured query language|sql language|database sql|query language|sql queries
+plsql,PL/SQL,programming_languages,data,pl sql|oracle plsql|oracle stored procedures|plsql programming
+tsql,T-SQL,programming_languages,data,transact sql|sql server tsql|microsoft sql|mssql syntax|transact-sql
+cobol,COBOL,programming_languages,legacy,cobol language|mainframe cobol|cobol programming
+objectivec,Objective-C,programming_languages,mobile,objective c|obj-c|objc|ios objective-c|objective-c programming
+fsharp,F#,programming_languages,functional,f sharp|f# language|dotnet f#|fsharp language
+erlang,Erlang,programming_languages,functional,erlang language|erlang otp|erlang programming
+zig,Zig,programming_languages,systems,zig language|zig programming|ziglang
+nim,Nim,programming_languages,systems,nim language|nim programming|nimlang
+assembly,Assembly,programming_languages,systems,asm|assembly language|x86 assembly|arm assembly|assembly programming
+solidity,Solidity,programming_languages,blockchain,solidity language|ethereum solidity|smart contract language|solidity programming
+clojure,Clojure,programming_languages,functional,clojure language|clojure lisp|clojure jvm|clojurescript
+ocaml,OCaml,programming_languages,functional,ocaml language|ocaml programming|objective caml
+prolog,Prolog,programming_languages,logic,prolog language|logic programming|prolog programming
+fortran,Fortran,programming_languages,scientific,fortran language|scientific fortran|fortran programming
+coffeescript,CoffeeScript,programming_languages,general,coffee script|coffeescript language|coffee js
+racket,Racket,programming_languages,functional,racket language|racket lisp|scheme racket
+vba,VBA,programming_languages,scripting,visual basic for applications|vba excel|excel vba|vba scripting
+fastapi,FastAPI,backend_frameworks,python,fast api|fastapi python|fastapi framework|fastapi rest
+flask,Flask,backend_frameworks,python,flask python|flask framework|flask web|flask rest api
+django,Django,backend_frameworks,python,django python|django framework|django web|django rest|django orm|drf|django rest framework
+expressjs,Express.js,backend_frameworks,nodejs,express|express.js|expressjs|express node|nodejs express|express framework
+springboot,Spring Boot,backend_frameworks,java,spring boot|spring-boot|springboot java|spring boot framework
+spring,Spring Framework,backend_frameworks,java,spring framework|spring mvc|spring java|springframework|spring data|spring security
+nestjs,NestJS,backend_frameworks,nodejs,nest.js|nestjs framework|nest typescript|nestjs rest|nestjs graphql
+rails,Ruby on Rails,backend_frameworks,ruby,ror|ruby rails|rails framework|rubyonrails|rails api
+laravel,Laravel,backend_frameworks,php,laravel php|laravel framework|laravel api|laravel rest
+gin,Gin,backend_frameworks,go,gin go|gin golang|gin framework|gin http
+echo,Echo,backend_frameworks,go,echo go|echo golang|echo framework|labstack echo
+fiber,Fiber,backend_frameworks,go,fiber go|fiber golang|fiber framework|go fiber
+actix,Actix-web,backend_frameworks,rust,actix web|actix-web|actix rust|actix framework|actix-web rust
+axum,Axum,backend_frameworks,rust,axum rust|axum framework|axum tokio|tokio axum
+rocket,Rocket,backend_frameworks,rust,rocket.rs|rocket rust|rocket framework|rocket web
+koa,Koa.js,backend_frameworks,nodejs,koa|koajs|koa node|koa framework
+hapi,Hapi.js,backend_frameworks,nodejs,hapijs|hapi node|hapi framework|hapi.js
+sinatra,Sinatra,backend_frameworks,ruby,sinatra ruby|sinatra framework|sinatra web
+phoenix,Phoenix Framework,backend_frameworks,elixir,phoenix elixir|phoenix framework|elixir phoenix|phoenix liveview
+grails,Grails,backend_frameworks,groovy,grails framework|grails groovy|grails web
+play_framework,Play Framework,backend_frameworks,scala,play framework|playframework|play scala|play java
+micronaut,Micronaut,backend_frameworks,java,micronaut java|micronaut framework|micronaut graal
+quarkus,Quarkus,backend_frameworks,java,quarkus java|quarkus framework|red hat quarkus
+vertx,Vert.x,backend_frameworks,java,vert.x|vertx java|eclipse vert.x|vertx framework
+tornado,Tornado,backend_frameworks,python,tornado python|tornado framework|tornado async
+aiohttp,aiohttp,backend_frameworks,python,aio http|aiohttp python|aiohttp framework|aiohttp server
+sanic,Sanic,backend_frameworks,python,sanic python|sanic framework|sanic async
+falcon,Falcon,backend_frameworks,python,falcon python|falcon framework|falcon api rest
+symfony,Symfony,backend_frameworks,php,symfony php|symfony framework|symfony components
+codeigniter,CodeIgniter,backend_frameworks,php,code igniter|codeigniter php|codeigniter framework
+strapi,Strapi,backend_frameworks,nodejs,strapi cms|strapi headless|strapi api
+nodejs,Node.js,backend_frameworks,javascript_runtime,node js|node.js|nodejs runtime|server-side javascript|node server|node backend|javascript server runtime
+react,React,frontend_frameworks,javascript,reactjs|react.js|react js|react library|react hooks|react 18|react 19
+vuejs,Vue.js,frontend_frameworks,javascript,vue|vue js|vuejs|vue 3|vue 2|vue framework|vue composition api
+angular,Angular,frontend_frameworks,javascript,angularjs|angular 2+|angular framework|angular typescript|angular 17
+svelte,Svelte,frontend_frameworks,javascript,svelte js|sveltejs|svelte framework|svelte 4|svelte 5|sveltekit
+nextjs,Next.js,frontend_frameworks,javascript,next.js|nextjs|next js|next react|next.js framework|next 14|next 15
+nuxtjs,Nuxt.js,frontend_frameworks,javascript,nuxt|nuxt.js|nuxtjs|nuxt vue|nuxt 3|nuxt framework
+gatsby,Gatsby,frontend_frameworks,javascript,gatsby js|gatsbyjs|gatsby react|gatsby static
+remix,Remix,frontend_frameworks,javascript,remix.run|remix react|remix framework|remix.js
+astro,Astro,frontend_frameworks,javascript,astro.build|astro framework|astro js|astro islands
+solidjs,SolidJS,frontend_frameworks,javascript,solid js|solid.js|solidjs framework|solidstart
+preact,Preact,frontend_frameworks,javascript,preact js|preact.js|preact react
+alpinejs,Alpine.js,frontend_frameworks,javascript,alpine|alpine js|alpinejs framework
+emberjs,Ember.js,frontend_frameworks,javascript,ember|ember.js|emberjs framework
+jquery,jQuery,frontend_frameworks,javascript,jquery.js|jquery library|jq|jquery javascript
+qwik,Qwik,frontend_frameworks,javascript,qwik.js|qwik framework|builder.io qwik
+html,HTML,frontend_technologies,markup,html5|html 5|hypertext markup language|html language|html markup
+css,CSS,frontend_technologies,styling,css3|css 3|cascading stylesheets|stylesheet|css language
+tailwindcss,Tailwind CSS,frontend_technologies,styling,tailwind|tailwind css|tailwind utility|tailwindcss framework
+bootstrap,Bootstrap,frontend_technologies,styling,bootstrap css|bootstrap framework|twitter bootstrap|bootstrap 5
+material_ui,Material UI,frontend_technologies,styling,mui|material-ui|material design ui|react material|materialui|mui react
+chakra_ui,Chakra UI,frontend_technologies,styling,chakra ui|chakra|react chakra|chakra react
+shadcn,shadcn/ui,frontend_technologies,styling,shadcn ui|shadcn components|radix ui|shadcn/ui
+sass,Sass/SCSS,frontend_technologies,styling,scss|sass css|sass preprocessor|css preprocessor|sass/scss
+less,Less,frontend_technologies,styling,less css|less preprocessor|less styling
+styled_components,Styled Components,frontend_technologies,styling,styled components|css-in-js|emotion|styled jsx
+webpack,Webpack,frontend_technologies,build_tools,webpack.js|webpack bundler|webpack config|webpack 5
+vite,Vite,frontend_technologies,build_tools,vite.js|vite bundler|vitejs|vite build tool
+parcel,Parcel,frontend_technologies,build_tools,parcel.js|parcel bundler
+rollup,Rollup,frontend_technologies,build_tools,rollup.js|rollup bundler|rollup.js bundler
+babel,Babel,frontend_technologies,transpilers,babel.js|babel transpiler|babeljs
+eslint,ESLint,frontend_technologies,linting,eslint js|es lint|javascript linting|eslint config
+prettier,Prettier,frontend_technologies,formatting,prettier.js|code formatter|prettier formatting
+storybook,Storybook,frontend_technologies,ui_testing,storybook.js|component storybook|storybook ui
+webassembly,WebAssembly,frontend_technologies,runtime,wasm|web assembly|webassembly runtime
+pwa,Progressive Web Apps,frontend_technologies,architecture,pwa|progressive web app|service workers|offline web
+react_native,React Native,mobile_development,cross_platform,rn|react-native|react native mobile|react native framework
+flutter,Flutter,mobile_development,cross_platform,flutter dart|flutter mobile|flutter framework|flutter sdk
+ionic,Ionic,mobile_development,cross_platform,ionic framework|ionic angular|ionic react|ionic vue
+xamarin,Xamarin,mobile_development,cross_platform,xamarin forms|xamarin native|microsoft xamarin|xamarin android ios
+expo,Expo,mobile_development,cross_platform,expo go|expo sdk|expo react native|expo cli
+swiftui,SwiftUI,mobile_development,ios,swift ui|swiftui framework|ios swiftui|apple swiftui
+uikit,UIKit,mobile_development,ios,uikit ios|ios uikit|apple uikit|uikit framework
+jetpack_compose,Jetpack Compose,mobile_development,android,compose|jetpack compose android|android compose|compose ui
+android_sdk,Android SDK,mobile_development,android,android development|android platform|android programming|android api
+capacitor,Capacitor,mobile_development,cross_platform,capacitorjs|ionic capacitor|capacitor plugin
+nativescript,NativeScript,mobile_development,cross_platform,native script|nativescript framework
+android_studio,Android Studio,mobile_development,android,android ide|android studio ide|android development tool
+xcode,Xcode,mobile_development,ios,xcode ide|apple xcode|ios xcode|macos xcode
+cordova,Cordova,mobile_development,cross_platform,apache cordova|phonegap|cordova mobile
+postgresql,PostgreSQL,databases_relational,rdbms,postgres|pg|psql|postgresql database|postgre sql|postgres db
+mysql,MySQL,databases_relational,rdbms,mysql database|mysql server|mysql db|mysql 8
+sqlite,SQLite,databases_relational,rdbms,sqlite database|sqlite3|sql lite|sqlite db
+mariadb,MariaDB,databases_relational,rdbms,maria db|mariadb database|mariadb server
+oracle_db,Oracle Database,databases_relational,rdbms,oracle|oracle db|oracle rdbms|oracle sql|oracle 19c
+sql_server,SQL Server,databases_relational,rdbms,mssql|microsoft sql server|sql server database|ms sql|sqlserver
+cockroachdb,CockroachDB,databases_relational,distributed,cockroach db|cockroachdb database|distributed sql cockroach
+timescaledb,TimescaleDB,databases_relational,time_series,timescale|timescale database|time series sql|timescale db
+duckdb,DuckDB,databases_relational,analytics,duck db|duckdb analytics|duckdb olap|duckdb in-process
+redshift,Amazon Redshift,databases_relational,cloud,aws redshift|redshift dw|amazon redshift|redshift warehouse
+planetscale,PlanetScale,databases_relational,cloud,planet scale|planetscale database|mysql planetscale
+db2,IBM Db2,databases_relational,enterprise,ibm db2|db2 database|ibm database|db2 sql
+neon,Neon,databases_relational,cloud,neon postgres|neon database|neon serverless|neon db
+mongodb,MongoDB,databases_nosql,document,mongo|mongodb database|mongo db|mongodb atlas|mongo atlas
+redis,Redis,databases_nosql,cache,redis cache|redis server|redis database|redis db|redis in-memory|redis cluster
+cassandra,Apache Cassandra,databases_nosql,wide_column,cassandra database|apache cassandra|cassandra db|cassandra noSQL
+dynamodb,DynamoDB,databases_nosql,key_value,dynamo db|aws dynamodb|amazon dynamodb|dynamodb aws
+firebase,Firebase,databases_nosql,document,firebase realtime|firebase database|firebase firestore|firestore|google firebase
+couchdb,CouchDB,databases_nosql,document,couch db|apache couchdb|couchdb database
+neo4j,Neo4j,databases_nosql,graph,neo4j database|graph database|neo4j graph|cypher neo4j
+influxdb,InfluxDB,databases_nosql,time_series,influx db|influxdb database|time series influx|influxdb 2
+elasticsearch,Elasticsearch,databases_nosql,search,elastic search|elastic|elasticsearch engine|es cluster|elastic search engine
+opensearch,OpenSearch,databases_nosql,search,open search|amazon opensearch|aws opensearch|opensearch cluster
+couchbase,Couchbase,databases_nosql,document,couch base|couchbase database|couchbase server
+hbase,HBase,databases_nosql,wide_column,apache hbase|hadoop hbase|hbase database
+memcached,Memcached,databases_nosql,cache,memcache|memcached cache|memcached server
+arangodb,ArangoDB,databases_nosql,multi_model,arango db|arangodb database|arango graph
+supabase,Supabase,databases_nosql,cloud,supabase postgres|supabase db|supabase platform
+upstash,Upstash,databases_nosql,cloud,upstash redis|upstash kafka|upstash serverless
+pgvector,pgvector,databases_vector,postgres_extension,pg vector|postgres vector|postgresql vector|vector extension postgres|pgvector extension
+pinecone,Pinecone,databases_vector,managed,pinecone vector|pinecone db|pinecone.io|pinecone index
+weaviate,Weaviate,databases_vector,open_source,weaviate database|weaviate vector|weaviate search
+chroma,Chroma,databases_vector,open_source,chromadb|chroma db|chroma vector|chromadb python|chroma vector store
+qdrant,Qdrant,databases_vector,open_source,qdrant vector|qdrant database|qdrant search|qdrant engine
+milvus,Milvus,databases_vector,open_source,milvus vector|milvus database|zilliz milvus|zilliz cloud
+faiss,FAISS,databases_vector,library,facebook faiss|faiss library|fb faiss|vector search faiss|faiss index
+lancedb,LanceDB,databases_vector,open_source,lance db|lancedb vector|lancedb database
+vespa,Vespa,databases_vector,open_source,vespa engine|vespa ai|vespa search|vespa vector
+aws,Amazon Web Services,cloud_platforms,general,aws cloud|amazon aws|amazon cloud|aws platform|amazon cloud services
+google_cloud,Google Cloud Platform,cloud_platforms,general,gcp|google cloud|gcp cloud|gcloud|google cloud platform
+azure,Microsoft Azure,cloud_platforms,general,microsoft azure|azure cloud|azure platform|ms azure|azure services
+digitalocean,DigitalOcean,cloud_platforms,general,digital ocean|do cloud|digitalocean cloud|digitalocean droplets
+cloudflare,Cloudflare,cloud_platforms,edge,cloudflare cdn|cloudflare cloud|cloudflare workers|cloudflare pages
+heroku,Heroku,cloud_platforms,paas,heroku platform|heroku paas|heroku deploy|heroku dyno
+render,Render,cloud_platforms,paas,render.com|render platform|render paas|render web service
+vercel,Vercel,cloud_platforms,paas,vercel platform|vercel deploy|vercel hosting|vercel serverless
+netlify,Netlify,cloud_platforms,paas,netlify platform|netlify hosting|netlify deploy|netlify functions
+flyio,Fly.io,cloud_platforms,paas,fly.io|fly io|flyio platform|fly machines
+railway,Railway,cloud_platforms,paas,railway.app|railway platform|railway deploy|railway cloud
+aws_ec2,Amazon EC2,cloud_aws,compute,ec2|aws ec2|elastic compute cloud|amazon ec2|ec2 instances
+aws_s3,Amazon S3,cloud_aws,storage,s3|aws s3|simple storage service|s3 bucket|amazon s3|s3 object storage
+aws_rds,Amazon RDS,cloud_aws,database,rds|aws rds|relational database service|amazon rds|rds postgres|rds mysql
+aws_lambda,AWS Lambda,cloud_aws,serverless,lambda|aws lambda|serverless lambda|lambda function|lambda handler
+aws_ecs,Amazon ECS,cloud_aws,containers,ecs|aws ecs|elastic container service|amazon ecs|ecs fargate
+aws_eks,Amazon EKS,cloud_aws,containers,eks|aws eks|elastic kubernetes service|amazon eks|eks cluster
+aws_cloudformation,AWS CloudFormation,cloud_aws,iac,cloudformation|aws cloudformation|cfn|cloud formation|cfn template
+aws_cloudwatch,AWS CloudWatch,cloud_aws,monitoring,cloudwatch|aws cloudwatch|amazon cloudwatch|cloudwatch logs|cloudwatch metrics
+aws_sqs,Amazon SQS,cloud_aws,messaging,sqs|aws sqs|simple queue service|amazon sqs|sqs queue
+aws_sns,Amazon SNS,cloud_aws,messaging,sns|aws sns|simple notification service|amazon sns|sns topic
+aws_api_gateway,AWS API Gateway,cloud_aws,api,api gateway aws|aws api gateway|amazon api gateway|apigw
+aws_cognito,AWS Cognito,cloud_aws,auth,cognito|aws cognito|amazon cognito|cognito user pool
+aws_iam,AWS IAM,cloud_aws,security,iam|aws iam|identity access management|amazon iam|iam policies|iam roles
+aws_cloudfront,AWS CloudFront,cloud_aws,cdn,cloudfront|aws cloudfront|amazon cloudfront|cloudfront distribution
+aws_glue,AWS Glue,cloud_aws,data,aws glue|amazon glue|glue etl|glue catalog|glue crawler
+aws_athena,Amazon Athena,cloud_aws,analytics,athena|aws athena|amazon athena|athena sql
+aws_sagemaker,Amazon SageMaker,cloud_aws,ml,sagemaker|aws sagemaker|amazon sagemaker|sage maker|sagemaker studio
+aws_bedrock,Amazon Bedrock,cloud_aws,ai,bedrock|aws bedrock|amazon bedrock|bedrock claude|bedrock titan
+aws_emr,Amazon EMR,cloud_aws,data,emr|aws emr|elastic mapreduce|amazon emr|emr spark
+aws_kinesis,Amazon Kinesis,cloud_aws,streaming,kinesis|aws kinesis|amazon kinesis|kinesis streams|kinesis data streams
+aws_step_functions,AWS Step Functions,cloud_aws,orchestration,step functions|aws step functions|state machine aws|sfn
+aws_secrets_manager,AWS Secrets Manager,cloud_aws,security,secrets manager|aws secrets|aws secrets manager|parameter store
+gcp_gke,Google Kubernetes Engine,cloud_gcp,containers,gke|google gke|google kubernetes engine|gke cluster
+gcp_cloud_run,Cloud Run,cloud_gcp,serverless,cloud run|gcp cloud run|google cloud run|cloud run service
+gcp_cloud_functions,Cloud Functions,cloud_gcp,serverless,cloud functions|gcp functions|google cloud functions|gcf
+gcp_bigquery,BigQuery,cloud_gcp,analytics,big query|gcp bigquery|google bigquery|bigquery sql|bq
+gcp_cloud_storage,Cloud Storage,cloud_gcp,storage,gcs|google cloud storage|gcp storage|cloud storage bucket|gcs bucket
+gcp_cloud_sql,Cloud SQL,cloud_gcp,database,cloud sql|gcp cloud sql|google cloud sql|cloud sql postgres
+gcp_pubsub,Google Pub/Sub,cloud_gcp,messaging,pub sub|google pub sub|gcp pub/sub|google pubsub|pubsub topics
+gcp_dataflow,Dataflow,cloud_gcp,data,google dataflow|gcp dataflow|apache beam dataflow|dataflow pipeline
+gcp_vertex_ai,Vertex AI,cloud_gcp,ml,vertex ai|gcp vertex|google vertex ai|vertex|vertex ai studio
+gcp_cloud_build,Cloud Build,cloud_gcp,cicd,cloud build|gcp build|google cloud build|cloud build trigger
+gcp_compute_engine,Compute Engine,cloud_gcp,compute,gce|google compute engine|gcp compute|compute engine vm
+gcp_app_engine,App Engine,cloud_gcp,paas,google app engine|gcp app engine|gae|app engine standard
+gcp_artifact_registry,Artifact Registry,cloud_gcp,registry,artifact registry gcp|google artifact registry|container registry gcp
+gcp_spanner,Cloud Spanner,cloud_gcp,database,google spanner|cloud spanner|google cloud spanner|spanner db
+gcp_bigTable,Cloud Bigtable,cloud_gcp,database,bigtable|google bigtable|cloud bigtable|bigtable database
+azure_functions,Azure Functions,cloud_azure,serverless,azure functions serverless|azure function app|azure serverless
+azure_blob_storage,Azure Blob Storage,cloud_azure,storage,azure blob|azure storage|azure blob container|azure storage account
+azure_sql,Azure SQL Database,cloud_azure,database,azure sql db|azure sql server|azure sql managed instance
+azure_cosmosdb,Azure Cosmos DB,cloud_azure,database,cosmos db|azure cosmos|cosmosdb|cosmos db azure
+azure_aks,Azure AKS,cloud_azure,containers,aks|azure kubernetes|azure container service|aks cluster
+azure_app_service,Azure App Service,cloud_azure,paas,azure web app|azure app service paas|azure web apps
+azure_devops,Azure DevOps,cloud_azure,cicd,azure devops pipelines|vsts|tfs|team foundation server|azure ci cd
+azure_ad,Azure Active Directory,cloud_azure,auth,azure ad|aad|entra id|microsoft entra|azure identity|azure sso
+azure_ml,Azure Machine Learning,cloud_azure,ml,azure machine learning|azure ml service|aml|azure ml studio
+azure_event_hub,Azure Event Hub,cloud_azure,messaging,event hub|azure event hub|eventhub|azure event streaming
+azure_service_bus,Azure Service Bus,cloud_azure,messaging,service bus|azure service bus|asb|azure messaging
+azure_monitor,Azure Monitor,cloud_azure,monitoring,azure monitoring|azure log analytics|log analytics workspace
+azure_container_registry,Azure Container Registry,cloud_azure,registry,acr|azure acr|azure container registry
+azure_api_management,Azure API Management,cloud_azure,api,apim|azure api management|azure apim|api management azure
+docker,Docker,containers_orchestration,containers,docker container|docker engine|docker ce|docker community edition|docker desktop|docker enterprise edition|docker ee|dockerfile|docker hub|docker image|docker build
+kubernetes,Kubernetes,containers_orchestration,orchestration,k8s|kube|kubernetes orchestration|kubectl|k8s cluster|kube cluster
+docker_compose,Docker Compose,containers_orchestration,containers,docker-compose|compose|docker compose yaml|compose file
+helm,Helm,containers_orchestration,package_manager,helm charts|helm kubernetes|helm chart|helm release|helm values
+podman,Podman,containers_orchestration,containers,podman container|podman engine|pod manager|podman machine
+containerd,containerd,containers_orchestration,containers,container-d|containerd runtime|containerd daemon
+docker_swarm,Docker Swarm,containers_orchestration,orchestration,swarm mode|docker swarm cluster|swarm services
+openshift,OpenShift,containers_orchestration,orchestration,red hat openshift|openshift kubernetes|ocp|okd|openshift platform
+rancher,Rancher,containers_orchestration,orchestration,rancher kubernetes|rancher platform|suse rancher|rancher k3s
+k3s,K3s,containers_orchestration,orchestration,lightweight kubernetes|k3s kubernetes|k3 kubernetes|k3s cluster
+istio,Istio,containers_orchestration,service_mesh,istio service mesh|istio proxy|envoy istio|service mesh istio
+linkerd,Linkerd,containers_orchestration,service_mesh,linkerd service mesh|linkerd proxy|linkerd2
+github_actions,GitHub Actions,cicd_tools,automation,gh actions|github workflows|github ci cd|github action workflow|gha
+jenkins,Jenkins,cicd_tools,automation,jenkins ci|jenkins pipeline|jenkins server|jenkins build|jenkins groovy
+gitlab_ci,GitLab CI/CD,cicd_tools,automation,gitlab ci|gitlab cd|gitlabci|gitlab pipeline|gitlab runner|gitlab yaml
+circleci,CircleCI,cicd_tools,automation,circle ci|circle.ci|circleci pipeline|circleci orbs
+travis_ci,Travis CI,cicd_tools,automation,travis.ci|travis build|travis-ci|travis yaml
+argocd,ArgoCD,cicd_tools,gitops,argo cd|argo-cd|argocd gitops|argo rollouts|argocd sync
+flux,Flux CD,cicd_tools,gitops,fluxcd|flux gitops|flux cd|weave flux|flux v2
+tekton,Tekton,cicd_tools,automation,tekton pipelines|tekton ci|tekton cd|tekton tasks
+buildkite,Buildkite,cicd_tools,automation,buildkite pipeline|buildkite ci|buildkite agents
+azure_pipelines,Azure Pipelines,cicd_tools,automation,azure ci cd|azure build pipeline|azure devops pipeline|azure yaml pipeline
+bitbucket_pipelines,Bitbucket Pipelines,cicd_tools,automation,bitbucket ci|bitbucket pipeline|atlassian bitbucket ci
+drone_ci,Drone CI,cicd_tools,automation,drone.io|drone build|drone pipeline|drone server
+spinnaker,Spinnaker,cicd_tools,deployment,spinnaker cd|continuous delivery spinnaker|spinnaker pipeline
+teamcity,TeamCity,cicd_tools,automation,team city|jetbrains teamcity|teamcity build|teamcity pipeline
+concourse,Concourse CI,cicd_tools,automation,concourse.ci|concourse pipeline|concourse ci cd
+terraform,Terraform,infrastructure_as_code,provisioning,terraform iac|hashicorp terraform|terraform cloud|terraform modules|hcl terraform|tfvars|tfstate
+pulumi,Pulumi,infrastructure_as_code,provisioning,pulumi iac|pulumi cloud|pulumi python|pulumi typescript
+ansible,Ansible,infrastructure_as_code,configuration_management,ansible playbook|red hat ansible|ansible automation|ansible tower|ansible galaxy
+chef,Chef,infrastructure_as_code,configuration_management,chef infra|chef cookbooks|opscode chef|chef inspec
+puppet,Puppet,infrastructure_as_code,configuration_management,puppet enterprise|puppet labs|puppet agent|puppet modules
+aws_cdk,AWS CDK,infrastructure_as_code,provisioning,cdk|cloud development kit|aws cloud development kit|cdk typescript|cdk python
+bicep,Bicep,infrastructure_as_code,provisioning,azure bicep|bicep template|arm bicep|bicep iac
+crossplane,Crossplane,infrastructure_as_code,kubernetes_native,crossplane kubernetes|crossplane iac|crossplane providers
+saltstack,SaltStack,infrastructure_as_code,configuration_management,salt|saltstack configuration|salt project|salt states
+vagrant,Vagrant,infrastructure_as_code,development,vagrant box|hashicorp vagrant|vagrant vm|vagrantfile
+prometheus,Prometheus,monitoring_observability,metrics,prometheus monitoring|prom|prometheus server|promql|prometheus metrics
+grafana,Grafana,monitoring_observability,visualization,grafana dashboard|grafana monitoring|grafana cloud|grafana panels
+datadog,Datadog,monitoring_observability,apm,datadog monitoring|dd trace|datadog apm|datadog metrics|datadog logs
+new_relic,New Relic,monitoring_observability,apm,newrelic|new relic apm|new relic observability|nr|newrelic one
+sentry,Sentry,monitoring_observability,error_tracking,sentry.io|sentry error|sentry monitoring|sentry sdk
+jaeger,Jaeger,monitoring_observability,tracing,jaeger tracing|jaeger distributed|uber jaeger|jaeger ui
+zipkin,Zipkin,monitoring_observability,tracing,zipkin tracing|twitter zipkin|zipkin server|zipkin ui
+opentelemetry,OpenTelemetry,monitoring_observability,standard,otel|open telemetry|opentelemetry sdk|otlp|otel collector
+elk_stack,ELK Stack,monitoring_observability,log_management,elk|elasticsearch logstash kibana|elastic stack|efk stack
+loki,Loki,monitoring_observability,log_management,grafana loki|loki logging|loki log aggregation|loki promtail
+honeycomb,Honeycomb,monitoring_observability,observability,honeycomb.io|honeycomb observability|honeycomb tracing
+pagerduty,PagerDuty,monitoring_observability,alerting,pager duty|pagerduty alerting|pagerduty oncall|pagerduty incidents
+splunk,Splunk,monitoring_observability,log_management,splunk siem|splunk enterprise|splunk cloud|splunk queries
+dynatrace,Dynatrace,monitoring_observability,apm,dynatrace apm|dynatrace monitoring|dynatrace observability|dt
+tempo,Grafana Tempo,monitoring_observability,tracing,grafana tempo|tempo tracing|tempo distributed tracing
+fluentd,Fluentd,monitoring_observability,log_management,fluentd logging|fluentd aggregator|td-agent|fluentbit
+apache_kafka,Apache Kafka,message_queues,streaming,kafka|kafka streaming|kafka topics|kafka broker|confluent kafka|kafka cluster
+rabbitmq,RabbitMQ,message_queues,messaging,rabbit mq|rabbitmq broker|amqp|rabbitmq messaging|rabbitmq exchanges
+celery,Celery,message_queues,task_queue,celery python|celery worker|celery beat|celery task queue|celery redis
+redis_streams,Redis Streams,message_queues,streaming,redis stream|redis pub sub|redis messaging|redis pubsub
+apache_pulsar,Apache Pulsar,message_queues,streaming,pulsar|pulsar messaging|apache pulsar streaming|pulsar topics
+nats,NATS,message_queues,messaging,nats.io|nats messaging|nats streaming|nats server|nats jetstream
+zeromq,ZeroMQ,message_queues,messaging,zmq|zero mq|0mq|zeromq library|zmq sockets
+activemq,ActiveMQ,message_queues,messaging,active mq|apache activemq|activemq broker|activemq artemis
+ibm_mq,IBM MQ,message_queues,messaging,ibm websphere mq|mq series|ibmmq|ibm message queue
+tensorflow,TensorFlow,ai_ml_frameworks,deep_learning,tensorflow 2|tf|tensorflow python|tensorflow gpu|tf 2.x|keras tensorflow
+pytorch,PyTorch,ai_ml_frameworks,deep_learning,torch|pytorch python|pytorch gpu|pytorch lightning|pt|pytorch 2
+scikit_learn,scikit-learn,ai_ml_frameworks,machine_learning,sklearn|scikit learn|sklearn python|sk-learn|scikit learn python
+keras,Keras,ai_ml_frameworks,deep_learning,keras python|keras tensorflow|keras api|tf.keras|keras functional
+jax,JAX,ai_ml_frameworks,deep_learning,jax python|google jax|jaxlib|jax flax|jax numpy
+huggingface,Hugging Face Transformers,ai_ml_frameworks,nlp,hugging face|hf transformers|transformers library|huggingface hub|transformers python|hf hub
+langchain,LangChain,ai_ml_frameworks,llm_frameworks,lang chain|langchain python|langchain llm|langchain framework|langchain js
+llamaindex,LlamaIndex,ai_ml_frameworks,llm_frameworks,llama index|llama-index|gpt index|llamaindex python|llama index python
+openai_sdk,OpenAI API,ai_ml_frameworks,llm_frameworks,openai api|openai python|openai client|openai library|openai sdk|chatgpt api
+anthropic_sdk,Anthropic API,ai_ml_frameworks,llm_frameworks,anthropic api|anthropic python|claude api|anthropic client|anthropic sdk
+onnx,ONNX,ai_ml_frameworks,model_optimization,onnx runtime|open neural network exchange|onnxruntime|onnx export
+ray,Ray,ai_ml_frameworks,distributed_ml,ray distributed|ray tune|ray serve|ray cluster|anyscale ray|ray rllib
+dask,Dask,ai_ml_frameworks,distributed_computing,dask python|dask distributed|dask dataframe|dask array|dask parallel
+xgboost,XGBoost,ai_ml_frameworks,gradient_boosting,xgb|extreme gradient boosting|xgboost python|xgb classifier|xgb regressor
+lightgbm,LightGBM,ai_ml_frameworks,gradient_boosting,light gbm|lightgbm python|microsoft lightgbm|lgbm
+catboost,CatBoost,ai_ml_frameworks,gradient_boosting,cat boost|catboost python|yandex catboost|catboost classifier
+optuna,Optuna,ai_ml_frameworks,hyperparameter_tuning,optuna python|hyperparameter optimization|optuna study|hyperparameter tuning
+spacy,spaCy,ai_ml_frameworks,nlp,spacy python|spacy nlp|spacy library|spacy en_core
+nltk,NLTK,ai_ml_frameworks,nlp,natural language toolkit|nltk python|nltk library|nltk corpus
+gensim,Gensim,ai_ml_frameworks,nlp,gensim python|gensim topic modeling|word2vec gensim|gensim lda
+opencv,OpenCV,ai_ml_frameworks,computer_vision,cv2|open cv|opencv python|computer vision python|opencv library
+sentence_transformers,Sentence Transformers,ai_ml_frameworks,nlp,sentence-transformers|sbert|sentence bert|sentence transformer|all-minilm
+pydantic,Pydantic,ai_ml_frameworks,validation,pydantic v2|pydantic python|pydantic validation|pydantic models|pydantic settings
+groq_api,Groq API,ai_ml_frameworks,llm_frameworks,groq|groq cloud|groq llm|groq api|groq fast inference
+ollama,Ollama,ai_ml_frameworks,llm_frameworks,ollama local|ollama llm|ollama models|local llm ollama
+machine_learning,Machine Learning,ai_ml_concepts,general,ml|machine learning algorithms|supervised learning|unsupervised learning|ml models
+deep_learning,Deep Learning,ai_ml_concepts,general,dl|neural network learning|deep neural networks|deep learning models
+nlp,Natural Language Processing,ai_ml_concepts,nlp,natural language processing|text processing|nlp algorithms|nlp tasks|text mining
+computer_vision,Computer Vision,ai_ml_concepts,cv,cv|image recognition|image processing|vision models|image classification
+reinforcement_learning,Reinforcement Learning,ai_ml_concepts,rl,rl|reinforcement learning algorithms|reward learning|policy gradient|rl agents
+transfer_learning,Transfer Learning,ai_ml_concepts,general,transfer learning models|domain adaptation|feature transfer|pretrained models
+fine_tuning,Fine-tuning,ai_ml_concepts,llm,fine tuning|model fine-tuning|llm fine tuning|instruction tuning|lora|qlora|peft
+rag,Retrieval-Augmented Generation,ai_ml_concepts,llm,rag|retrieval augmented generation|rag pipeline|rag system|hybrid search rag
+prompt_engineering,Prompt Engineering,ai_ml_concepts,llm,prompt design|prompt optimization|llm prompting|prompt crafting|few shot prompting|chain of thought|cot
+embeddings,Embeddings,ai_ml_concepts,representation,vector embeddings|text embeddings|semantic embeddings|word embeddings|embedding models|dense retrieval
+vector_search,Vector Search,ai_ml_concepts,search,semantic search|vector similarity search|ann search|approximate nearest neighbor|knn search
+neural_networks,Neural Networks,ai_ml_concepts,architecture,nn|artificial neural networks|deep neural network|ann|feedforward network
+transformers_arch,Transformers Architecture,ai_ml_concepts,architecture,transformer model|attention transformer|bert architecture|gpt architecture|vit
+attention_mechanism,Attention Mechanism,ai_ml_concepts,architecture,self attention|multi-head attention|attention layer|cross attention|scaled dot product
+rlhf,RLHF,ai_ml_concepts,llm,reinforcement learning from human feedback|rlhf training|preference learning|dpo|direct preference optimization
+llm,Large Language Models,ai_ml_concepts,llm,large language model|llm development|foundation models|gpt|llama|claude|gpt-4|gemini|language models|llm inference
+diffusion_models,Diffusion Models,ai_ml_concepts,generative_ai,stable diffusion|generative diffusion|image generation models|ddpm|score matching
+object_detection,Object Detection,ai_ml_concepts,cv,yolo|object recognition|detection models|bounding box detection|yolov8|detr
+time_series,Time Series Analysis,ai_ml_concepts,ml,time series forecasting|temporal data|sequence modeling|arima|lstm time series
+anomaly_detection,Anomaly Detection,ai_ml_concepts,ml,outlier detection|anomaly recognition|fault detection|anomaly scoring
+generative_ai,Generative AI,ai_ml_concepts,general,gen ai|ai generation|generative models|ai content generation|genai
+feature_engineering,Feature Engineering,ai_ml_concepts,ml,feature extraction|feature selection|feature creation|data preprocessing ml|feature importance
+model_evaluation,Model Evaluation,ai_ml_concepts,ml,model validation|cross validation|model metrics|roc auc|confusion matrix|precision recall|f1 score
+mlops_concepts,MLOps,ai_ml_concepts,general,ml ops|machine learning operations|ml lifecycle|model lifecycle|model monitoring
+zero_shot_learning,Zero-Shot Learning,ai_ml_concepts,llm,zero shot|0-shot learning|zero-shot classification|zero shot prompting
+few_shot_learning,Few-Shot Learning,ai_ml_concepts,llm,few shot|few-shot examples|in-context learning|few shot prompting
+agentic_ai,Agentic AI,ai_ml_concepts,llm,ai agents|llm agents|autonomous agents|agentic workflows|agent frameworks|multi-agent systems
+model_quantization,Model Quantization,ai_ml_concepts,optimization,quantization|model compression|int8 quantization|gguf|bits and bytes|bitsandbytes
+apache_spark,Apache Spark,data_engineering,processing,spark|pyspark|spark sql|spark streaming|databricks spark|spark rdd|spark dataframe
+apache_airflow,Apache Airflow,data_engineering,orchestration,airflow|airflow dags|airflow scheduler|airflow tasks|airflow operators
+dbt,dbt,data_engineering,transformation,data build tool|dbt core|dbt cloud|analytics engineering|dbt models|dbt tests
+hadoop,Apache Hadoop,data_engineering,processing,hadoop|hdfs|mapreduce|apache hadoop|hadoop ecosystem|hadoop yarn
+apache_flink,Apache Flink,data_engineering,stream_processing,flink|flink streaming|apache flink|flink sql|flink jobs
+apache_hive,Apache Hive,data_engineering,batch_processing,hive|hive sql|hive query|hiveql|apache hive
+trino,Trino,data_engineering,query_engine,trino sql|presto sql|prestodb|trino query|presto distributed sql
+great_expectations,Great Expectations,data_engineering,data_quality,gx|great expectations python|data quality|data validation ge
+apache_beam,Apache Beam,data_engineering,processing,beam|apache beam pipeline|beam sdk|dataflow beam|beam transforms
+delta_lake,Delta Lake,data_engineering,storage,delta lake spark|databricks delta|delta format|delta tables
+apache_iceberg,Apache Iceberg,data_engineering,storage,iceberg|iceberg table|apache iceberg format|iceberg catalog
+databricks,Databricks,data_engineering,platform,databricks platform|databricks spark|databricks notebook|databricks unity catalog
+snowflake,Snowflake,data_engineering,cloud_dw,snowflake dwh|snowflake cloud|snowflake database|snow sql|snowflake compute
+data_pipeline,Data Pipeline,data_engineering,general,etl|elt|data ingestion|etl pipeline|batch pipeline|streaming pipeline|data flow
+data_modeling,Data Modeling,data_engineering,general,dimensional modeling|star schema|snowflake schema|data warehouse modeling|erd
+data_governance,Data Governance,data_engineering,management,data catalog|data lineage|data quality management|metadata management|data stewardship
+kafka_streams,Kafka Streams,data_engineering,stream_processing,kafka streams api|kafka ksql|ksqldb|kafka stream processing
+pandas,Pandas,data_science,python,pandas python|pandas dataframe|pandas library|pd|data manipulation pandas|pandas 2
+numpy,NumPy,data_science,python,numpy python|numpy array|np|numpy library|numerical python|ndarray
+matplotlib,Matplotlib,data_science,visualization,matplotlib python|matplotlib visualization|pyplot|matplotlib.pyplot|mpl
+statistics,Statistics,data_science,foundations,statistical analysis|statistical methods|hypothesis testing|probability theory|bayesian statistics|frequentist statistics|stats|descriptive statistics|inferential statistics
+seaborn,Seaborn,data_science,visualization,seaborn python|seaborn visualization|statistical visualization seaborn
+plotly,Plotly,data_science,visualization,plotly python|plotly dash|plotly visualization|dash|plotly express
+jupyter,Jupyter,data_science,notebooks,jupyter notebook|jupyter lab|ipython notebook|ipynb|jupyter python|jupyter hub
+scipy,SciPy,data_science,python,scipy python|scipy library|scientific python|scipy stats|scipy optimize
+statsmodels,Statsmodels,data_science,python,statsmodels python|statistical models python|statsmodels library|sm
+tableau,Tableau,data_science,visualization,tableau desktop|tableau server|tableau public|tableau analytics|tableau prep
+power_bi,Power BI,data_science,visualization,powerbi|microsoft power bi|power bi desktop|power bi service|dax
+streamlit,Streamlit,data_science,apps,streamlit python|streamlit app|streamlit dashboard|streamlit cloud
+gradio,Gradio,data_science,apps,gradio app|gradio demo|gradio interface|huggingface gradio|gradio blocks
+apache_superset,Apache Superset,data_science,visualization,superset|apache superset|superset dashboard|superset charts
+polars,Polars,data_science,python,polars dataframe|polars python|polars rs|polars library|polars rust
+metabase,Metabase,data_science,visualization,metabase dashboard|metabase analytics|metabase bi|open source bi
+mlflow,MLflow,mlops,experiment_tracking,mlflow tracking|mlflow models|mlflow registry|databricks mlflow|mlflow runs
+wandb,Weights & Biases,mlops,experiment_tracking,weights and biases|wandb tracking|wandb python|wandb ai|w&b|wandb sweeps
+kubeflow,Kubeflow,mlops,orchestration,kubeflow pipelines|kubeflow ml|kubeflow platform|kfp
+seldon,Seldon Core,mlops,model_serving,seldon core|seldon deploy|seldon inference|seldon mlserver
+bentoml,BentoML,mlops,model_serving,bento ml|bentoml serving|bentoml python|bentoml runner
+triton_inference,Triton Inference Server,mlops,model_serving,nvidia triton|triton server|triton inference|triton serving|triton backend
+dvc,DVC,mlops,version_control,data version control|dvc python|git dvc|dvc pipeline|dvc remote
+clearml,ClearML,mlops,experiment_tracking,clear ml|clearml python|trains ml|clearml platform|clearml tasks
+evidently,Evidently AI,mlops,monitoring,evidently python|ml monitoring|model monitoring|evidently dashboard|evidently reports
+neptune,Neptune.ai,mlops,experiment_tracking,neptune ml|neptune ai|neptune tracking|neptune.ai
+pytest,pytest,testing,python,pytest python|python testing|pytest framework|pytest fixtures|py.test|pytest plugins
+unittest,unittest,testing,python,python unittest|unit test python|python unit testing|python standard testing
+jest,Jest,testing,javascript,jest js|jest testing|jest framework|jest javascript|jest react|jest mocks
+mocha,Mocha,testing,javascript,mocha js|mocha testing|mocha framework|mocha chai
+cypress,Cypress,testing,e2e,cypress io|cypress testing|cypress e2e|cypress integration|cypress component
+playwright,Playwright,testing,e2e,playwright testing|playwright e2e|microsoft playwright|playwright python|playwright typescript
+selenium,Selenium,testing,e2e,selenium webdriver|selenium testing|selenium python|selenium automation|selenium grid
+vitest,Vitest,testing,javascript,vitest testing|vitest framework|vite testing|vitest unit
+junit,JUnit,testing,java,junit 5|junit testing|junit java|junit framework|junit jupiter
+testng,TestNG,testing,java,test ng|testng java|testng framework|testng annotations
+postman,Postman,testing,api,postman api|postman testing|postman collection|newman postman|postman workspace
+k6,k6,testing,performance,k6 load testing|k6 performance|grafana k6|k6 scripts
+locust,Locust,testing,performance,locust load testing|locust python|locust performance|locust swarm
+robot_framework,Robot Framework,testing,automation,robot framework testing|robot automation|robotframework|rfbrowser
+testcontainers,Testcontainers,testing,integration,test containers|testcontainers java|testcontainers python|testcontainers go
+pact,Pact,testing,contract,pact contract testing|consumer driven contracts|pact broker|pact js
+microservices,Microservices,system_design,architecture,microservice architecture|microservices design|service oriented|soa|micro-services
+rest_api,REST API,system_design,api_design,rest|restful api|rest api design|restful|restful web services|rest endpoints|http api
+graphql,GraphQL,system_design,api_design,graph ql|graphql api|graphql schema|graphql queries|graphql mutations|graphql subscriptions
+grpc,gRPC,system_design,api_design,grpc protocol|grpc framework|google rpc|protocol buffers|protobuf grpc
+websockets,WebSockets,system_design,real_time,web socket|websocket protocol|real time communication|ws protocol|socket.io
+event_driven_arch,Event-Driven Architecture,system_design,architecture,eda|event driven|event driven design|event bus|event streaming|reactive systems
+cqrs,CQRS,system_design,patterns,command query responsibility segregation|cqrs pattern|command query separation|read write segregation
+event_sourcing,Event Sourcing,system_design,patterns,event store|event sourcing pattern|event log|append-only log
+ddd,Domain-Driven Design,system_design,methodology,domain driven design|ddd patterns|bounded context|ubiquitous language|aggregates
+distributed_systems,Distributed Systems,system_design,architecture,distributed computing|distributed architecture|consensus|distributed databases|cap theorem
+load_balancing,Load Balancing,system_design,infrastructure,load balancer|nginx load balancing|haproxy|load distribution|weighted round robin
+rate_limiting,Rate Limiting,system_design,patterns,rate limit|throttling|api rate limiting|request throttling|token bucket
+circuit_breaker,Circuit Breaker,system_design,patterns,circuit breaker pattern|fault tolerance|resilience pattern|hystrix|resilience4j
+caching,Caching,system_design,performance,cache|caching strategy|cache invalidation|caching layer|redis caching|write-through|write-back
+cdn,CDN,system_design,infrastructure,content delivery network|edge caching|cdn distribution|cloudflare cdn|cdn caching
+api_gateway,API Gateway,system_design,infrastructure,api gateway pattern|api management|api routing|kong|tyk
+service_mesh,Service Mesh,system_design,infrastructure,istio|linkerd|service mesh pattern|envoy proxy|consul connect
+saga_pattern,Saga Pattern,system_design,patterns,saga transactions|distributed transactions|choreography saga|orchestration saga
+database_sharding,Database Sharding,system_design,databases,sharding|horizontal partitioning|db sharding|data partitioning|shard key
+high_availability,High Availability,system_design,infrastructure,ha|high availability design|fault tolerance|redundancy|failover|active-passive
+scalability,Scalability,system_design,general,horizontal scaling|vertical scaling|scale out|scale up|auto scaling|elastic scaling
+async_programming,Async Programming,system_design,patterns,asynchronous programming|async await|non-blocking io|coroutines|event loop|concurrency
+concurrency,Concurrency,system_design,patterns,concurrent programming|multithreading|parallelism|thread safety|race conditions|mutex
+message_passing,Message Passing,system_design,patterns,messaging pattern|message broker|pub sub pattern|event bus|async messaging
+reactive_programming,Reactive Programming,system_design,patterns,reactive systems|rxjs|reactor|reactive streams|observable patterns
+agile,Agile,methodologies,process,agile methodology|agile development|agile principles|agile software development|agile teams
+scrum,Scrum,methodologies,process,scrum methodology|scrum framework|scrum master|sprint planning|scrum ceremonies|sprint review
+kanban,Kanban,methodologies,process,kanban board|kanban method|kanban flow|kanban system|kanban metrics
+devops,DevOps,methodologies,culture,dev ops|devops culture|devops practices|devops principles|devops engineer|devops mindset
+gitops,GitOps,methodologies,deployment,git ops|gitops deployment|flux gitops|argocd gitops|gitops principles
+tdd,Test-Driven Development,methodologies,engineering,test driven development|tdd methodology|red green refactor|tdd cycle
+bdd,Behavior-Driven Development,methodologies,engineering,behavior driven development|bdd testing|gherkin|cucumber bdd|bdd scenarios
+pair_programming,Pair Programming,methodologies,engineering,pair coding|pair programming practice|mob programming|extreme programming
+code_review,Code Review,methodologies,engineering,code review process|pull request review|pr review|code inspection|code audit
+clean_code,Clean Code,methodologies,engineering,clean code principles|code quality|readable code|maintainable code|refactoring|code smells
+solid_principles,SOLID Principles,methodologies,engineering,solid design principles|single responsibility|open closed|dependency injection|liskov|interface segregation
+design_patterns,Design Patterns,methodologies,engineering,gof patterns|software patterns|creational patterns|structural patterns|behavioral patterns|factory singleton observer
+twelve_factor_app,Twelve-Factor App,methodologies,deployment,12 factor|12 factor app|twelve factor methodology|12 factor principles
+technical_writing,Technical Writing,methodologies,communication,documentation writing|tech writing|api documentation|technical docs|technical documentation
+extreme_programming,Extreme Programming,methodologies,process,xp|extreme programming|xp practices|continuous integration xp
+continuous_improvement,Continuous Improvement,methodologies,process,kaizen|continuous improvement culture|retrospectives|process improvement|iteration improvement
+git,Git,version_control,tools,git version control|git cli|git commands|version control git|git flow|git rebase|git merge
+github,GitHub,version_control,platforms,github.com|github platform|github repo|github repository|github enterprise|gh cli
+gitlab,GitLab,version_control,platforms,gitlab.com|gitlab platform|gitlab repository|gitlab scm|gitlab self-hosted
+bitbucket,Bitbucket,version_control,platforms,bitbucket.org|atlassian bitbucket|bitbucket repo|bitbucket cloud
+svn,SVN,version_control,tools,subversion|apache svn|svn version control|svn repository
+owasp,OWASP,security,standards,owasp top 10|owasp guidelines|web application security|owasp testing|owasp zap
+oauth2,OAuth 2.0,security,auth,oauth|oauth 2|oauth2 protocol|open authorization|oauth flow|authorization code flow
+jwt,JWT,security,auth,json web token|jwt token|jwt authentication|jwt auth|access token|refresh token
+ssl_tls,SSL/TLS,security,encryption,ssl|tls|https|ssl certificate|tls certificate|transport layer security|tls 1.3
+zero_trust,Zero Trust,security,architecture,zero trust security|zero trust network|ztna|zero trust architecture|never trust always verify
+penetration_testing,Penetration Testing,security,offensive,pen testing|pentest|ethical hacking|red team|security testing|vulnerability testing
+secrets_management,Secrets Management,security,practices,vault|hashicorp vault|secret management|aws secrets manager|credential management|secret rotation
+sast_dast,SAST/DAST,security,tools,static analysis|dynamic analysis|code security scanning|sonarqube|snyk|static application security testing
+devsecops,DevSecOps,security,practices,dev sec ops|security in devops|shift left security|security automation|secure sdlc
+container_security,Container Security,security,practices,docker security|kubernetes security|image scanning|trivy|container hardening
+api_security,API Security,security,practices,api authentication|api authorization|api key management|api firewall|waf|rate limiting api
+compliance,Security Compliance,security,standards,soc 2|gdpr|hipaa|pci dss|iso 27001|compliance|audit compliance
+nginx,Nginx,web_servers,server,nginx server|nginx web server|nginx config|nginx proxy|nginx load balancer|nginx reverse proxy
+apache_web,Apache HTTP Server,web_servers,server,apache web server|apache httpd|httpd|apache server|apache config
+traefik,Traefik,web_servers,proxy,traefik proxy|traefik ingress|traefik routing|traefik middleware|traefik v3
+caddy,Caddy,web_servers,server,caddy server|caddyfile|caddy web server|caddy https
+gunicorn,Gunicorn,web_servers,wsgi,gunicorn server|green unicorn|wsgi server|gunicorn workers
+uvicorn,Uvicorn,web_servers,asgi,uvicorn server|asgi server|uvicorn fastapi|uvicorn workers
+haproxy,HAProxy,web_servers,load_balancer,ha proxy|haproxy lb|haproxy load balancer|haproxy config
+maven,Maven,build_tools,java,apache maven|maven build|maven pom|mvn|maven java|maven dependencies
+gradle,Gradle,build_tools,java,gradle build|gradle kotlin dsl|gradle java|gradle groovy dsl|gradle wrapper
+npm,npm,build_tools,javascript,node package manager|npm install|npmjs|npm scripts|npm registry
+yarn,Yarn,build_tools,javascript,yarn package|yarn install|yarnpkg|yarn berry|yarn 3|yarn workspaces
+pnpm,pnpm,build_tools,javascript,pnpm package|pnpm install|pnpm monorepo|pnpm workspace
+cmake,CMake,build_tools,cpp,cmake build|cmake c++|cmake makefile|cmake configuration|cmake lists
+bazel,Bazel,build_tools,general,bazel build|google bazel|bazel monorepo|bazel rules|bazelbuild
+openapi,OpenAPI,api_standards,specification,openapi spec|openapi 3|swagger openapi|api specification|oas|openapi 3.1
+swagger,Swagger,api_standards,tools,swagger ui|swagger docs|swagger spec|swagger api|swagger editor|swaggerhub
+protocol_buffers,Protocol Buffers,api_standards,serialization,protobuf|proto files|google protobuf|protocol buffers serialization|proto3
+graphql_api,GraphQL API Design,api_standards,design,graphql schema design|graphql types|graphql resolvers|graphql federation|schema stitching
+json_api,JSON API,api_standards,format,json format|json schema|json api spec|application/json|json:api
+webhooks,Webhooks,api_standards,integration,webhook events|webhook handler|webhook receiver|http callbacks|event webhooks
+linux,Linux,operating_systems,general,linux os|linux server|linux administration|ubuntu|debian|centos|rhel|fedora|arch linux
+windows_server,Windows Server,operating_systems,enterprise,windows server 2019|windows server 2022|active directory|iis|windows admin
+macos,macOS,operating_systems,desktop,mac os|macos development|apple silicon|m1 m2|osx
+networking,Networking,operating_systems,infrastructure,tcp ip|networking concepts|dns|dhcp|http https|network protocols|osi model
+technical_leadership,Technical Leadership,soft_skills,leadership,tech lead|technical lead|engineering lead|staff engineer|principal engineer|tech leadership
+team_management,Team Management,soft_skills,leadership,engineering management|team lead|people management|team building|engineering manager
+mentorship,Mentorship,soft_skills,leadership,mentoring|technical mentoring|coaching engineers|developer mentorship|1 on 1
+problem_solving,Problem Solving,soft_skills,general,analytical thinking|debugging skills|root cause analysis|troubleshooting|critical thinking
+communication,Communication,soft_skills,general,technical communication|stakeholder communication|written communication|verbal communication|presentation skills
+cross_functional,Cross-functional Collaboration,soft_skills,general,cross team collaboration|stakeholder management|interdisciplinary work|product collaboration
+system_thinking,Systems Thinking,soft_skills,general,holistic thinking|systems approach|big picture thinking|architecture thinking
+project_management,Project Management,soft_skills,management,project planning|project delivery|timeline management|resource management|pmp|jira|linear
+data_structures,Data Structures,computer_science,fundamentals,arrays|linked lists|trees|graphs|hash tables|stacks|queues|heaps|data structures algorithms
+algorithms,Algorithms,computer_science,fundamentals,algorithm design|sorting algorithms|searching algorithms|dynamic programming|greedy algorithms|big o notation|complexity analysis
+computer_networks,Computer Networks,computer_science,fundamentals,osi model|tcp ip stack|network programming|sockets|http protocol|network fundamentals
+operating_systems_concepts,Operating Systems Concepts,computer_science,fundamentals,process management|memory management|file systems|os scheduling|virtualization concepts
+compiler_design,Compiler Design,computer_science,fundamentals,lexing|parsing|ast|compiler frontend|compiler backend|llvm
+database_theory,Database Theory,computer_science,fundamentals,acid properties|normalization|transactions|database design|relational theory|sql optimization
+system_design_interviews,System Design,computer_science,fundamentals,system design interview|design scalable systems|distributed system design|hld|high level design|low level design
+big_data,Big Data,data_engineering,general,big data processing|large scale data|petabyte scale|data at scale|hadoop ecosystem|big data architecture
+airflow_dags,Airflow DAGs,data_engineering,orchestration,dag development|airflow task dependencies|airflow scheduling|airflow xcom|airflow sensors
+mlflow_tracking,MLflow Tracking,mlops,experiment_tracking,mlflow experiments|mlflow artifacts|mlflow metrics|ml experiment tracking
+api_design,API Design,system_design,api_design,restful api design|api best practices|api versioning|api documentation|api contracts|backend api
+serverless,Serverless,system_design,architecture,serverless architecture|function as a service|faas|serverless computing|lambda architecture|serverless framework
+infrastructure_monitoring,Infrastructure Monitoring,monitoring_observability,general,server monitoring|host metrics|node exporter|infrastructure observability|resource monitoring|cpu memory disk monitoring
+linux_administration,Linux Administration,operating_systems,administration,linux sysadmin|linux commands|bash administration|linux permissions|systemd|cron jobs|linux networking
+security_engineering,Security Engineering,security,practices,appsec|application security|secure coding|security architecture|threat modeling|security review|ssdlc

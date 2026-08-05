@@ -1,0 +1,154 @@
+{% extends "base.html" %}
+{% block title %}CareerCopilot — Analyzing Your Resume{% endblock %}
+
+{% block content %}
+<div class="fade-in max-w-2xl mx-auto text-center">
+
+  <div class="bg-white rounded-2xl shadow-sm border border-slate-200 p-10">
+
+    <!-- Spinner -->
+    <div id="spinner" class="mb-6">
+      <svg class="animate-spin mx-auto w-12 h-12 text-brand-500" fill="none" viewBox="0 0 24 24">
+        <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"/>
+        <path class="opacity-75" fill="currentColor"
+              d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"/>
+      </svg>
+    </div>
+
+    <h1 class="text-2xl font-bold text-slate-900 mb-2">Analyzing your resume…</h1>
+    <p class="text-slate-500 mb-2">
+      Target role: <span class="font-semibold text-brand-600">{{ target_role }}</span>
+    </p>
+    <p class="text-sm text-slate-400 mb-8">This usually takes 20–60 seconds.</p>
+
+    <!-- Progress bar -->
+    <div class="bg-slate-100 rounded-full h-3 overflow-hidden mb-4">
+      <div
+        id="progressBar"
+        class="progress-bar h-full bg-brand-500 rounded-full"
+        style="width: {{ task.progress_pct if task else 0 }}%"
+      ></div>
+    </div>
+
+    <!-- Status message -->
+    <p id="statusMsg" class="text-sm text-slate-600 mb-8">
+      {{ task.progress_message if task else 'Queued…' }}
+    </p>
+
+    <!-- Steps indicator -->
+    <div class="grid grid-cols-4 gap-2 text-xs text-slate-400">
+      <div id="step-parse" class="flex flex-col items-center gap-1">
+        <div class="w-8 h-8 rounded-full border-2 border-slate-200 flex items-center justify-center font-bold">1</div>
+        <span>Parse</span>
+      </div>
+      <div id="step-extract" class="flex flex-col items-center gap-1">
+        <div class="w-8 h-8 rounded-full border-2 border-slate-200 flex items-center justify-center font-bold">2</div>
+        <span>Skills</span>
+      </div>
+      <div id="step-gap" class="flex flex-col items-center gap-1">
+        <div class="w-8 h-8 rounded-full border-2 border-slate-200 flex items-center justify-center font-bold">3</div>
+        <span>Gap</span>
+      </div>
+      <div id="step-roadmap" class="flex flex-col items-center gap-1">
+        <div class="w-8 h-8 rounded-full border-2 border-slate-200 flex items-center justify-center font-bold">4</div>
+        <span>Roadmap</span>
+      </div>
+    </div>
+
+    <!-- Error state (hidden by default) -->
+    <div id="errorState" class="hidden mt-8 p-4 bg-red-50 border border-red-200 rounded-xl">
+      <p class="text-red-700 font-semibold mb-1">Analysis failed</p>
+      <p id="errorMsg" class="text-red-600 text-sm mb-4"></p>
+      <a href="/" class="inline-block bg-brand-600 text-white text-sm px-4 py-2 rounded-lg hover:bg-brand-700">
+        Try again →
+      </a>
+    </div>
+
+  </div>
+
+  <!-- Share notice -->
+  <p class="mt-6 text-sm text-slate-400">
+    This page will auto-redirect when analysis is complete. You can bookmark this URL.
+  </p>
+
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script>
+const SESSION_ID = "{{ session_id }}";
+const POLL_URL = `/v1/tasks/${SESSION_ID}`;
+let pollInterval;
+
+// Thresholds match exact backend progress events:
+//   10  → _update_task "Parsing resume…"
+//   40  → _update_task "Extracting skills…"
+//   65  → _update_task "Analyzing skill gaps…"   (fast step — may not be caught every poll)
+//   75  → _update_task "Generating roadmap…"
+const STEPS = [
+  { id: 'step-parse',   threshold: 10 },
+  { id: 'step-extract', threshold: 40 },
+  { id: 'step-gap',     threshold: 65 },
+  { id: 'step-roadmap', threshold: 75 },
+];
+
+// Track which steps have already been activated so we never revert them
+const activatedSteps = new Set();
+
+function activateStep(id) {
+  if (activatedSteps.has(id)) return;
+  activatedSteps.add(id);
+  const el = document.getElementById(id);
+  if (!el) return;
+  const dot = el.querySelector('div');
+  dot.classList.remove('border-slate-200');
+  dot.classList.add('border-brand-500', 'bg-brand-50', 'text-brand-600');
+}
+
+function updateStepIndicator(pct) {
+  // Collect newly crossed thresholds in order
+  const toActivate = STEPS.filter(
+    ({ id, threshold }) => pct >= threshold && !activatedSteps.has(id)
+  );
+  if (!toActivate.length) return;
+
+  // Stagger activation by 300 ms per step so they never appear simultaneous,
+  // even when a fast backend phase (e.g. gap analysis at 65%) is missed by the
+  // poll and the client jumps straight from 40% to 75%.
+  toActivate.forEach(({ id }, i) => {
+    setTimeout(() => activateStep(id), i * 300);
+  });
+}
+
+async function poll() {
+  try {
+    const resp = await fetch(POLL_URL);
+    if (!resp.ok) return;
+    const data = await resp.json();
+
+    document.getElementById('progressBar').style.width = data.progress_pct + '%';
+    document.getElementById('statusMsg').textContent = data.progress_message || '';
+    updateStepIndicator(data.progress_pct);
+
+    if (data.status === 'complete') {
+      clearInterval(pollInterval);
+      window.location.href = data.results_url;
+    }
+
+    if (data.status === 'failed') {
+      clearInterval(pollInterval);
+      document.getElementById('spinner').classList.add('hidden');
+      document.getElementById('errorState').classList.remove('hidden');
+      document.getElementById('errorMsg').textContent = data.error || 'Unknown error.';
+    }
+  } catch (e) {
+    // Network hiccup — keep polling
+  }
+}
+
+// Poll every 1 second (was 2s) to maximize chances of catching the short-lived
+// 65% gap-analysis state before it advances to 75% (roadmap generation).
+poll();
+pollInterval = setInterval(poll, 1000);
+</script>
+{% endblock %}

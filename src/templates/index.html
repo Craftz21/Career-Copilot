@@ -1,0 +1,351 @@
+{% extends "base.html" %}
+{% block title %}CareerCopilot — Upload Your Resume{% endblock %}
+
+{% block content %}
+<div class="fade-in">
+
+  <!-- Hero -->
+  <div class="text-center mb-12">
+    <h1 class="text-4xl font-extrabold text-slate-900 mb-4">
+      Know exactly what skills you're missing.
+    </h1>
+    <p class="text-xl text-slate-500 max-w-2xl mx-auto">
+      Upload your resume, pick your target role — get a readiness score and a week-by-week learning roadmap in under 60 seconds.
+    </p>
+    <div class="mt-4 flex flex-wrap justify-center gap-3 text-sm text-slate-400">
+      <span class="flex items-center gap-1">✓ No signup required</span>
+      <span class="flex items-center gap-1">✓ Free forever</span>
+      <span class="flex items-center gap-1">✓ Shareable results URL</span>
+    </div>
+  </div>
+
+  <!-- Upload Card -->
+  <div class="bg-white rounded-2xl shadow-sm border border-slate-200 max-w-2xl mx-auto">
+
+    <!-- Tab bar -->
+    <div class="flex border-b border-slate-200">
+      <button
+        id="tab-role"
+        onclick="switchTab('role')"
+        class="flex-1 py-4 text-sm font-semibold text-brand-600 border-b-2 border-brand-600 transition-colors"
+      >
+        By Role
+      </button>
+      <button
+        id="tab-jd"
+        onclick="switchTab('jd')"
+        class="flex-1 py-4 text-sm font-semibold text-slate-400 border-b-2 border-transparent hover:text-slate-600 transition-colors"
+      >
+        Match to Job Description
+      </button>
+    </div>
+
+    <!-- ── Tab 1: By Role (existing flow) ─────────────────────────── -->
+    <div id="panel-role" class="p-8">
+      <form
+        id="uploadForm"
+        action="/v1/resume/upload"
+        method="post"
+        enctype="multipart/form-data"
+      >
+        <div class="mb-6">
+          <label for="target_role" class="block text-sm font-semibold text-slate-700 mb-2">
+            Target Role <span class="text-red-500">*</span>
+          </label>
+          <input
+            id="target_role"
+            name="target_role"
+            type="text"
+            required
+            minlength="2"
+            maxlength="200"
+            placeholder="e.g. Backend Software Engineer, ML Engineer, Data Scientist"
+            class="w-full border border-slate-300 rounded-lg px-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-brand-500 focus:border-transparent placeholder-slate-400"
+          />
+        </div>
+
+        <div class="mb-6">
+          <label for="duration" class="block text-sm font-semibold text-slate-700 mb-2">
+            How long do you have to prepare?
+          </label>
+          <select
+            id="duration"
+            name="duration"
+            class="w-full border border-slate-300 rounded-lg px-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-brand-500 bg-white"
+          >
+            <option value="4 weeks">4 weeks (intense sprint)</option>
+            <option value="2 months">2 months</option>
+            <option value="3 months" selected>3 months (recommended)</option>
+            <option value="6 months">6 months (thorough)</option>
+            <option value="12 months">12 months (complete reskill)</option>
+          </select>
+        </div>
+
+        <div class="mb-8">
+          <label class="block text-sm font-semibold text-slate-700 mb-2">
+            Resume <span class="text-red-500">*</span>
+          </label>
+          <div
+            id="dropzone"
+            class="border-2 border-dashed border-slate-300 rounded-xl p-8 text-center cursor-pointer hover:border-brand-500 transition-colors"
+            onclick="document.getElementById('file').click()"
+          >
+            <div id="dropzoneContent">
+              <svg class="mx-auto w-10 h-10 text-slate-300 mb-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+                      d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/>
+              </svg>
+              <p class="text-sm text-slate-500">
+                <span class="font-semibold text-brand-600">Click to upload</span> or drag and drop
+              </p>
+              <p class="text-xs text-slate-400 mt-1">PDF or DOCX — max 5 MB</p>
+            </div>
+            <div id="fileSelected" class="hidden text-sm font-medium text-brand-600"></div>
+          </div>
+          <input id="file" name="file" type="file" accept=".pdf,.docx,.doc" required class="hidden" />
+        </div>
+
+        <div id="errorBanner" class="hidden mb-4 p-3 bg-red-50 border border-red-200 rounded-lg text-red-700 text-sm"></div>
+
+        <button
+          type="submit"
+          id="submitBtn"
+          class="w-full bg-brand-600 hover:bg-brand-700 text-white font-semibold py-3 px-6 rounded-xl transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+        >
+          Analyze My Resume →
+        </button>
+      </form>
+    </div>
+
+    <!-- ── Tab 2: Match to JD ──────────────────────────────────────── -->
+    <div id="panel-jd" class="p-8 hidden">
+      <p class="text-sm text-slate-500 mb-6">
+        Paste a job description and upload your resume. We'll extract the exact skills the employer wants and tell you how ready you are — from the actual JD, not a generic role profile.
+      </p>
+      <form
+        id="jdForm"
+        action="/v1/jd/analyze"
+        method="post"
+        enctype="multipart/form-data"
+      >
+        <!-- Job title + Company (side by side) -->
+        <div class="grid grid-cols-2 gap-4 mb-6">
+          <div>
+            <label for="jd_job_title" class="block text-sm font-semibold text-slate-700 mb-2">
+              Job Title <span class="text-slate-400 font-normal">(optional)</span>
+            </label>
+            <input
+              id="jd_job_title"
+              name="job_title"
+              type="text"
+              maxlength="200"
+              placeholder="e.g. Senior Backend Engineer"
+              class="w-full border border-slate-300 rounded-lg px-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-brand-500 placeholder-slate-400"
+            />
+          </div>
+          <div>
+            <label for="jd_company" class="block text-sm font-semibold text-slate-700 mb-2">
+              Company <span class="text-slate-400 font-normal">(optional)</span>
+            </label>
+            <input
+              id="jd_company"
+              name="company_name"
+              type="text"
+              maxlength="200"
+              placeholder="e.g. Stripe"
+              class="w-full border border-slate-300 rounded-lg px-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-brand-500 placeholder-slate-400"
+            />
+          </div>
+        </div>
+
+        <!-- JD textarea -->
+        <div class="mb-6">
+          <label for="jd_text" class="block text-sm font-semibold text-slate-700 mb-2">
+            Job Description <span class="text-red-500">*</span>
+          </label>
+          <textarea
+            id="jd_text"
+            name="jd_text"
+            required
+            minlength="100"
+            maxlength="15000"
+            rows="8"
+            placeholder="Paste the full job description here — requirements, responsibilities, qualifications…"
+            class="w-full border border-slate-300 rounded-lg px-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-brand-500 placeholder-slate-400 resize-y"
+          ></textarea>
+          <p id="jdCharCount" class="text-xs text-slate-400 mt-1 text-right">0 / 15000</p>
+        </div>
+
+        <!-- Duration -->
+        <div class="mb-6">
+          <label for="jd_duration" class="block text-sm font-semibold text-slate-700 mb-2">
+            How long do you have to prepare?
+          </label>
+          <select
+            id="jd_duration"
+            name="duration"
+            class="w-full border border-slate-300 rounded-lg px-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-brand-500 bg-white"
+          >
+            <option value="4 weeks">4 weeks (intense sprint)</option>
+            <option value="2 months">2 months</option>
+            <option value="3 months" selected>3 months (recommended)</option>
+            <option value="6 months">6 months (thorough)</option>
+            <option value="12 months">12 months (complete reskill)</option>
+          </select>
+        </div>
+
+        <!-- Resume upload -->
+        <div class="mb-8">
+          <label class="block text-sm font-semibold text-slate-700 mb-2">
+            Resume <span class="text-red-500">*</span>
+          </label>
+          <div
+            id="jdDropzone"
+            class="border-2 border-dashed border-slate-300 rounded-xl p-8 text-center cursor-pointer hover:border-brand-500 transition-colors"
+            onclick="document.getElementById('jdFile').click()"
+          >
+            <div id="jdDropzoneContent">
+              <svg class="mx-auto w-10 h-10 text-slate-300 mb-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+                      d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/>
+              </svg>
+              <p class="text-sm text-slate-500">
+                <span class="font-semibold text-brand-600">Click to upload</span> or drag and drop
+              </p>
+              <p class="text-xs text-slate-400 mt-1">PDF or DOCX — max 5 MB</p>
+            </div>
+            <div id="jdFileSelected" class="hidden text-sm font-medium text-brand-600"></div>
+          </div>
+          <input id="jdFile" name="file" type="file" accept=".pdf,.docx,.doc" required class="hidden" />
+        </div>
+
+        <div id="jdErrorBanner" class="hidden mb-4 p-3 bg-red-50 border border-red-200 rounded-lg text-red-700 text-sm"></div>
+
+        <button
+          type="submit"
+          id="jdSubmitBtn"
+          class="w-full bg-brand-600 hover:bg-brand-700 text-white font-semibold py-3 px-6 rounded-xl transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+        >
+          Match Resume to JD →
+        </button>
+      </form>
+    </div>
+  </div>
+
+  <!-- Social proof / feature highlights -->
+  <div class="mt-16 grid grid-cols-1 md:grid-cols-3 gap-6 max-w-4xl mx-auto">
+    <div class="bg-white rounded-xl border border-slate-200 p-6">
+      <div class="text-2xl mb-2">🎯</div>
+      <h3 class="font-semibold text-slate-800 mb-1">Semantic Skill Matching</h3>
+      <p class="text-sm text-slate-500">Not keyword search — AI embeddings understand synonyms and related skills.</p>
+    </div>
+    <div class="bg-white rounded-xl border border-slate-200 p-6">
+      <div class="text-2xl mb-2">📊</div>
+      <h3 class="font-semibold text-slate-800 mb-1">Readiness Score</h3>
+      <p class="text-sm text-slate-500">See your exact percentage match against 500+ role-relevant skills.</p>
+    </div>
+    <div class="bg-white rounded-xl border border-slate-200 p-6">
+      <div class="text-2xl mb-2">🗺️</div>
+      <h3 class="font-semibold text-slate-800 mb-1">Week-by-Week Roadmap</h3>
+      <p class="text-sm text-slate-500">AI-generated learning plan with real resources, tailored to your gap.</p>
+    </div>
+  </div>
+
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script>
+// ── Tab switching ────────────────────────────────────────────────────────────
+function switchTab(tab) {
+  const isJD = tab === 'jd';
+  document.getElementById('panel-role').classList.toggle('hidden', isJD);
+  document.getElementById('panel-jd').classList.toggle('hidden', !isJD);
+
+  const tabRole = document.getElementById('tab-role');
+  const tabJD   = document.getElementById('tab-jd');
+  tabRole.className = isJD
+    ? 'flex-1 py-4 text-sm font-semibold text-slate-400 border-b-2 border-transparent hover:text-slate-600 transition-colors'
+    : 'flex-1 py-4 text-sm font-semibold text-brand-600 border-b-2 border-brand-600 transition-colors';
+  tabJD.className = isJD
+    ? 'flex-1 py-4 text-sm font-semibold text-brand-600 border-b-2 border-brand-600 transition-colors'
+    : 'flex-1 py-4 text-sm font-semibold text-slate-400 border-b-2 border-transparent hover:text-slate-600 transition-colors';
+}
+
+// ── Shared file-input helper ─────────────────────────────────────────────────
+function wireFileInput(inputId, dropzoneId, contentId, selectedId) {
+  const input    = document.getElementById(inputId);
+  const dropzone = document.getElementById(dropzoneId);
+  const content  = document.getElementById(contentId);
+  const selected = document.getElementById(selectedId);
+
+  input.addEventListener('change', () => {
+    const f = input.files[0];
+    if (f) {
+      content.classList.add('hidden');
+      selected.classList.remove('hidden');
+      selected.textContent = `✓ ${f.name} (${(f.size / 1024 / 1024).toFixed(2)} MB)`;
+    }
+  });
+  dropzone.addEventListener('dragover', (e) => { e.preventDefault(); dropzone.classList.add('border-brand-500'); });
+  dropzone.addEventListener('dragleave', () => dropzone.classList.remove('border-brand-500'));
+  dropzone.addEventListener('drop', (e) => {
+    e.preventDefault();
+    dropzone.classList.remove('border-brand-500');
+    const f = e.dataTransfer.files[0];
+    if (f) {
+      const dt = new DataTransfer();
+      dt.items.add(f);
+      input.files = dt.files;
+      input.dispatchEvent(new Event('change'));
+    }
+  });
+}
+
+wireFileInput('file', 'dropzone', 'dropzoneContent', 'fileSelected');
+wireFileInput('jdFile', 'jdDropzone', 'jdDropzoneContent', 'jdFileSelected');
+
+// ── Shared form submit helper ────────────────────────────────────────────────
+function wireForm(formId, btnId, errorId, defaultBtnText) {
+  const form = document.getElementById(formId);
+  const btn  = document.getElementById(btnId);
+  const err  = document.getElementById(errorId);
+
+  form.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    err.classList.add('hidden');
+    btn.disabled = true;
+    btn.textContent = 'Uploading…';
+
+    const formData = new FormData(form);
+    try {
+      const resp = await fetch(form.action, { method: 'POST', body: formData });
+      const data = await resp.json();
+      if (!resp.ok) {
+        err.textContent = data.detail || 'Upload failed. Please try again.';
+        err.classList.remove('hidden');
+        btn.disabled = false;
+        btn.textContent = defaultBtnText;
+        return;
+      }
+      window.location.href = data.processing_url;
+    } catch (_) {
+      err.textContent = 'Network error. Please check your connection and try again.';
+      err.classList.remove('hidden');
+      btn.disabled = false;
+      btn.textContent = defaultBtnText;
+    }
+  });
+}
+
+wireForm('uploadForm', 'submitBtn', 'errorBanner', 'Analyze My Resume →');
+wireForm('jdForm', 'jdSubmitBtn', 'jdErrorBanner', 'Match Resume to JD →');
+
+// ── JD character counter ─────────────────────────────────────────────────────
+const jdText    = document.getElementById('jd_text');
+const jdCounter = document.getElementById('jdCharCount');
+jdText.addEventListener('input', () => {
+  jdCounter.textContent = `${jdText.value.length} / 15000`;
+});
+</script>
+{% endblock %}

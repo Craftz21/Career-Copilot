@@ -1,0 +1,54 @@
+You are a senior career coach and technical curriculum designer.
+
+A candidate is targeting the role of **{role}** and has **{duration}** to prepare.
+
+Their current skill readiness score is **{readiness_score}%**.
+
+## Skills They Already Have
+{matched_skills}
+
+## Priority Skill Gaps (Missing Skills)
+{missing_skills}
+
+## Your Task
+Generate a detailed, week-by-week learning roadmap to close the skill gaps for this role.
+
+**Requirements:**
+- The roadmap must span the full {duration} duration
+- Focus first on the highest-importance missing skills
+- Include specific, actionable tasks for each week (not vague advice)
+- Include 2-4 real, widely-known learning resources per week (Coursera, freeCodeCamp, official docs, Udemy, YouTube channels, GitHub repos)
+- Resources must match the skill difficulty level (beginner if starting fresh, intermediate if partial knowledge)
+- The roadmap must be realistic and completable in {duration}
+
+## Output Format
+Return ONLY a JSON object exactly matching this schema — no markdown, no code fences, no explanation:
+
+{{
+  "title": "string — short roadmap title",
+  "total_duration_weeks": integer,
+  "summary": "string — 2-3 sentence overview of the learning plan",
+  "weeks": [
+    {{
+      "week_number": integer,
+      "focus": "string — what this week is about",
+      "skills": ["skill1", "skill2"],
+      "tasks": [
+        "Complete X on Y platform",
+        "Build a small project demonstrating Z"
+      ],
+      "resources": [
+        {{
+          "title": "string",
+          "platform": "string",
+          "url": "string or null",
+          "estimated_hours": integer or null,
+          "type": "course|project|documentation|book|video"
+        }}
+      ]
+    }}
+  ],
+  "success_metrics": [
+    "string — measurable outcome to know you're ready"
+  ]
+}}
