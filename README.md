@@ -17,7 +17,6 @@ CareerCopilot helps job seekers understand how well they match a target role, di
 - 🗺️ Personalized Learning Roadmaps
 - 📈 Interactive Analytics Dashboard
 - ⚡ Asynchronous Resume Processing
-- 🔗 Shareable Results
 
 ---
 
