@@ -23,19 +23,22 @@ CareerCopilot helps job seekers understand how well they match a target role, di
 
 # Demo
 
-> **Live Demo:** *Coming Soon*
-
 ### Landing Page
-*(Add screenshot here)*
+<img width="1275" height="652" alt="landing" src="https://github.com/user-attachments/assets/06bef4f7-0d9e-467c-83d6-bba0aebdf1e7" />
 
 ### Resume Upload
-*(Add screenshot here)*
+<img width="1230" height="866" alt="Upload" src="https://github.com/user-attachments/assets/f0be9b8c-d02a-4848-9c0d-89888d43282c" />
+<img width="926" height="485" alt="image" src="https://github.com/user-attachments/assets/fcea4e21-8fa9-480a-a523-3b302b8f273e" />
 
 ### Results Dashboard
-*(Add screenshot here)*
+<img width="1080" height="649" alt="image" src="https://github.com/user-attachments/assets/09fc7c1d-e4b0-4729-9931-dbb7f9e82eeb" />
+<img width="1102" height="552" alt="image" src="https://github.com/user-attachments/assets/ee651405-500f-4245-83df-b54158e003ea" />
+
 
 ### Learning Roadmap
-*(Add screenshot here)*
+<img width="525" height="645" alt="image" src="https://github.com/user-attachments/assets/9b415500-9d37-4d40-b42a-4bcca90627af" />
+<img width="462" height="776" alt="image" src="https://github.com/user-attachments/assets/0a03516a-3690-428c-8b78-68814436bb6d" />
+
 
 ---
 
